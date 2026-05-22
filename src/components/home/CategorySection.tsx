@@ -17,14 +17,14 @@ export function CategorySection() {
         {/* Editorial Heading Grid */}
         <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-16 sm:mb-24 gap-6 md:gap-12">
           <SectionTitle
-            subtitle="02 / The Segments"
-            title="Sartorial Disciplines"
+            subtitle="SHOP BY"
+            title="Categories"
             align="left"
             className="md:max-w-xl"
           />
           <FadeUp delay={0.3} className="md:max-w-md pb-1">
             <p className="text-[#1A1A1A]/70 font-sans text-sm sm:text-base leading-relaxed font-light">
-              We separate our creations into four distinct disciplines, ensuring whether you seek raw, uncut textiles or full hand-sculpted bespoke consultations, your desires are met with absolute devotion.
+From breathable linen textures to refined cotton blends, each fabric is selected for everyday wear, natural comfort, and timeless simplicity.
             </p>
           </FadeUp>
         </div>
