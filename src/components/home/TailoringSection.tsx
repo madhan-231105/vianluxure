@@ -39,7 +39,7 @@ export function TailoringSection() {
   ];
 
   return (
-    <section id="tailoring" className="py-24 sm:py-32 bg-[#F7F3EE]">
+    <section id="tailoring" className="py-12 sm:py-16 bg-[#F7F3EE]">
       <Container>
         {/* Title */}
         <SectionTitle

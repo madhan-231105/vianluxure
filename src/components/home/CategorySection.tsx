@@ -12,7 +12,7 @@ import { FadeUp } from '../animations/FadeUp';
 
 export function CategorySection() {
   return (
-    <section id="collective" className="py-24 sm:py-32 bg-[#F7F3EE]">
+    <section id="collective" className="py-12 sm:py-16 bg-[#F7F3EE]">
       <Container>
         {/* Editorial Heading Grid */}
         <div className="flex flex-col md:flex-row items-start justify-between mb-16 sm:mb-24 gap-6 md:gap-12">

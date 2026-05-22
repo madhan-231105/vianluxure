@@ -10,6 +10,49 @@
   --color-text-luxury: #1A1A1A;
 }
 
+/* High-Legibility Premium Typography for all Content Sections (except Hero) and Footer */
+main > section:nth-of-type(n+2),
+footer {
+  --font-sans: "Inter", "Manrope", sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
+  font-family: "Inter", "Manrope", sans-serif;
+}
+
+/* Sturdy and beautiful Playfair Display serif headers */
+main > section:nth-of-type(n+2) h2,
+main > section:nth-of-type(n+2) h3,
+main > section:nth-of-type(n+2) h4,
+main > section:nth-of-type(n+2) .font-serif,
+footer .font-serif {
+  font-family: "Playfair Display", Georgia, serif !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.02em !important;
+}
+
+/* Ensure all body copy, descriptions, list items, and spans are highly readable and thick enough */
+main > section:nth-of-type(n+2) p,
+main > section:nth-of-type(n+2) li,
+main > section:nth-of-type(n+2) span:not(.font-mono),
+main > section:nth-of-type(n+2) a:not(.font-mono),
+main > section:nth-of-type(n+2) button:not(.font-mono),
+main > section:nth-of-type(n+2) blockquote,
+footer p,
+footer span:not(.font-mono) {
+  font-family: "Inter", "Manrope", sans-serif !important;
+  font-weight: 450 !important; /* Sturdy medium-regular weight */
+  font-size: 1.02rem !important; /* Increased for excellent visibility */
+  line-height: 1.65 !important;
+}
+
+/* Technical monospaced text retains its monospace style but with bold clarity */
+main > section:nth-of-type(n+2) .font-mono,
+footer .font-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  font-weight: 600 !important;
+  font-size: 0.78rem !important;
+  letter-spacing: 0.22em !important;
+}
+
 /* Custom Scrollbar for Luxury Aesthetics */
 ::-webkit-scrollbar {
   width: 6px;
