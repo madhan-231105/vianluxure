@@ -38,7 +38,7 @@ export function SectionTitle({
       )}
       
       <FadeUp delay={0.2} y={20}>
-        <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-[#1A1A1A] tracking-wide leading-[1.15]">
+        <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-light text-[#1A1A1A] tracking-wide leading-[1.15]">
           {title}
         </h2>
       </FadeUp>

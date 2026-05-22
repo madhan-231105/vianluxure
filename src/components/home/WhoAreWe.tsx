@@ -68,7 +68,7 @@ export function WhoAreWe() {
           </div>
 
           {/* Right Panel: Clean Philosophy Tenets Grid */}
-          <div className="lg:col-span-6 flex flex-col gap-10 lg:pt-20">
+          <div className="lg:col-span-6 flex flex-col gap-10 xl:pt-20 lg:pt-10 pt-0">
             {philosophy.map((item, idx) => (
               <motion.div
                 key={idx}

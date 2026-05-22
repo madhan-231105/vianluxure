@@ -16,18 +16,21 @@ export function StaticCollage() {
       url: '/images/vian_hero_luxury_1779434551630.png',
       caption: 'La Grande Entrée — Heavy Organic Silhouette',
       aspect: 'aspect-[3/4]',
+      margin: '',
       delay: 0.1
     },
     {
       url: '/images/vian_fabric_showcase_1779434571577.png',
       caption: 'Normandy Flax — Raw Pure Weave Density',
-      aspect: 'aspect-[1/1] sm:mt-12',
+      aspect: 'aspect-[1/1]',
+      margin: 'md:mt-12 mt-0',
       delay: 0.3
     },
     {
       url: '/images/vian_tailoring_bespoke_1779434589378.png',
       caption: 'Bespoke Atelier — Made To Measure Precision',
-      aspect: 'aspect-[4/5] sm:translate-y-6',
+      aspect: 'aspect-[4/5]',
+      margin: 'md:mt-24 mt-0',
       delay: 0.5
     }
   ];
@@ -54,10 +57,10 @@ export function StaticCollage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 1.2, delay: img.delay, ease: [0.16, 1, 0.3, 1] }}
-              className={`flex flex-col group ${img.aspect}`}
+              className={`flex flex-col group ${img.margin}`}
             >
               {/* Image Frame with gold border details */}
-              <div className="relative overflow-hidden bg-[#E8DED1] border border-[#1A1A1A]/5 shadow-xs transition-shadow duration-500 hover:shadow-md cursor-pointer">
+              <div className={`relative overflow-hidden bg-[#E8DED1] border border-[#1A1A1A]/5 shadow-xs transition-shadow duration-500 hover:shadow-md cursor-pointer ${img.aspect}`}>
                 <motion.img
                   src={img.url}
                   alt={img.caption}

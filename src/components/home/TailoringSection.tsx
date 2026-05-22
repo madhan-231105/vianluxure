@@ -60,27 +60,27 @@ export function TailoringSection() {
                 key={step.num}
                 delay={idx * 0.15}
                 y={25}
-                className="group flex flex-col items-start"
+                className="group w-full"
               >
-                {/* Visual Circle & Icon */}
-                <div className="flex items-center gap-4 xl:flex-col xl:items-start xl:gap-6 mb-5">
-                  <div className="h-14 w-14 rounded-full bg-[#1A1A1A] text-[#F7F3EE] group-hover:bg-[#C8A97E] group-hover:text-[#1A1A1A] flex items-center justify-center transition-all duration-500 shadow-md relative z-10 border border-[#C8A97E]/10 cursor-pointer">
+                <div className="flex gap-5 items-start xl:flex-col xl:items-start xl:gap-6">
+                  {/* Visual Circle & Icon */}
+                  <div className="h-14 w-14 flex-shrink-0 rounded-full bg-[#1A1A1A] text-[#F7F3EE] group-hover:bg-[#C8A97E] group-hover:text-[#1A1A1A] flex items-center justify-center transition-all duration-500 shadow-md relative z-10 border border-[#C8A97E]/10 cursor-pointer">
                     {step.icon}
                   </div>
+                  
+                  {/* Step details & text content */}
                   <div className="flex flex-col">
-                    <span className="font-mono text-xs text-[#C8A97E] font-semibold uppercase tracking-widest leading-none">
+                    <span className="font-mono text-xs text-[#C8A97E] font-semibold uppercase tracking-widest leading-none block mb-1">
                       Step {step.num}
                     </span>
-                    <h3 className="font-serif text-lg sm:text-xl text-[#1A1A1A] font-light tracking-wide mt-1 leading-tight">
+                    <h3 className="font-serif text-lg sm:text-xl text-[#1A1A1A] font-light tracking-wide leading-tight">
                       {step.title}
                     </h3>
+                    <p className="text-xs sm:text-sm text-[#1A1A1A]/65 font-sans tracking-wide leading-relaxed font-light mt-3">
+                      {step.description}
+                    </p>
                   </div>
                 </div>
-
-                {/* Description */}
-                <p className="text-xs sm:text-sm text-[#1A1A1A]/65 font-sans tracking-wide leading-relaxed font-light pl-18 xl:pl-0">
-                  {step.description}
-                </p>
               </FadeUp>
             ))}
           </div>

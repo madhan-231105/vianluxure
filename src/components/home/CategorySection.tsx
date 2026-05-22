@@ -15,14 +15,14 @@ export function CategorySection() {
     <section id="collective" className="py-12 sm:py-16 bg-[#F7F3EE]">
       <Container>
         {/* Editorial Heading Grid */}
-        <div className="flex flex-col md:flex-row items-start justify-between mb-16 sm:mb-24 gap-6 md:gap-12">
+        <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-16 sm:mb-24 gap-6 md:gap-12">
           <SectionTitle
             subtitle="02 / The Segments"
             title="Sartorial Disciplines"
             align="left"
             className="md:max-w-xl"
           />
-          <FadeUp delay={0.3} className="md:max-w-md md:pt-14">
+          <FadeUp delay={0.3} className="md:max-w-md pb-1">
             <p className="text-[#1A1A1A]/70 font-sans text-sm sm:text-base leading-relaxed font-light">
               We separate our creations into four distinct disciplines, ensuring whether you seek raw, uncut textiles or full hand-sculpted bespoke consultations, your desires are met with absolute devotion.
             </p>

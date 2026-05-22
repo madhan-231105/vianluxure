@@ -51,12 +51,12 @@ export function Navbar() {
         <Container>
           <div className="flex items-center justify-between">
             {/* Left Nav links - desktop */}
-            <div className="hidden lg:flex items-center gap-8 xl:gap-11">
+            <div className="hidden lg:flex items-center gap-5 xl:gap-11">
               {navLinks.slice(0, 3).map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
-                  className={`font-sans text-[11px] uppercase tracking-[0.2em] hover:text-[#C8A97E] transition-colors duration-500 font-semibold relative py-1 group ${
+                  className={`font-sans text-[10px] xl:text-[11px] uppercase tracking-[0.2em] hover:text-[#C8A97E] transition-colors duration-500 font-semibold relative py-1 group ${
                     isScrolled ? 'text-[#1A1A1A]/85' : 'text-[#F7F3EE]'
                   }`}
                   style={{ textShadow: isScrolled ? 'none' : '0 1px 4px rgba(0,0,0,0.35)' }}
@@ -104,12 +104,12 @@ export function Navbar() {
             </a>
  
             {/* Right Nav links - desktop */}
-            <div className="hidden lg:flex items-center gap-8 xl:gap-11">
+            <div className="hidden lg:flex items-center gap-5 xl:gap-11">
               {navLinks.slice(3).map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
-                  className={`font-sans text-[11px] uppercase tracking-[0.2em] hover:text-[#C8A97E] transition-colors duration-500 font-semibold relative py-1 group ${
+                  className={`font-sans text-[10px] xl:text-[11px] uppercase tracking-[0.2em] hover:text-[#C8A97E] transition-colors duration-500 font-semibold relative py-1 group ${
                     isScrolled ? 'text-[#1A1A1A]/85' : 'text-[#F7F3EE]'
                   }`}
                   style={{ textShadow: isScrolled ? 'none' : '0 1px 4px rgba(0,0,0,0.35)' }}

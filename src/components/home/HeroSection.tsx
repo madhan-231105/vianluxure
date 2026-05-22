@@ -13,31 +13,39 @@ import { ArrowDown } from 'lucide-react';
 const slides = [
   {
     image: "/images/banner1.webp",
-    subtitle: "Signature Raw Linen Atelier",
-    title: "Crafted For Comfort.",
-    italicTitle: "Designed For Elegance.",
-    description: "Discover a collection sculpted from the finest French flax grass, celebrating the soft drapes, quiet textures, and raw luxury of organic tailoring."
+    subtitle: "01 / Ready To Wear Atelier",
+    title: "Ready Shirts",
+    italicTitle: "For Everyday Wear.",
+    description: "Shop ready-to-wear linen shirts designed with comfortable fits and clean everyday styling.",
+    buttonText: "View Fabrics",
+    targetId: "collective"
   },
   {
     image: "/images/banner2.png",
-    subtitle: "The French Flax Heritage",
-    title: "Normandy Fields.",
-    italicTitle: "Pure Honest Weave.",
-    description: "Sourced directly from northern France. Every fiber is woven with history, boasting rich textures, organic purity, and highly breathable drapes."
+    subtitle: "02 / Signature Daily Fit",
+    title: "Ready Shirts",
+    italicTitle: "For Everyday Wear.",
+    description: "Shop ready-to-wear linen shirts designed with comfortable fits and clean everyday styling.",
+    buttonText: "Shop Now",
+    targetId: "featured-products"
   },
   {
     image: "/images/banner3.png",
-    subtitle: "The Bespoke Tailoring Experience",
-    title: "Sculpted To Order.",
-    italicTitle: "Refined To Perfection.",
-    description: "Indulge in personalized fits created by hand. Tailored to hang beautifully, breathing life and quiet luxury into your daily capsule wardrobe."
+    subtitle: "03 / Tailor Customizations",
+    title: "Choose The Details",
+    italicTitle: "You Like.",
+    description: "Select collars, cuffs, buttons, sleeves, and fabrics to create a shirt suited for your style.",
+    buttonText: "Explore More",
+    targetId: "collective"
   },
   {
     image: "/images/banner4.png",
-    subtitle: "The Warm Season Wardrobe",
-    title: "Timeless Minimalist.",
-    italicTitle: "Sophisticated Comfort.",
-    description: "Embrace lightweight elegance designed for transitions. Breathable pieces that flow effortlessly with you throughout summer and autumn days."
+    subtitle: "04 / Personalized Artisanal Fits",
+    title: "Shirts Made Around",
+    italicTitle: "Your Measurements.",
+    description: "Create fully personalized shirts designed around your measurements and preferred styling details.",
+    buttonText: "Customize Now",
+    targetId: "tailoring"
   }
 ];
 
@@ -107,13 +115,13 @@ export function HeroSection() {
             {/* Cinematic Premium Header */}
             <h1 className="overflow-visible py-2">
               <span
-                className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-medium text-[#F7F3EE] tracking-normal leading-[1.1] block"
+                className="font-serif text-3xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-medium text-[#F7F3EE] tracking-normal leading-[1.1] block"
                 style={{ textShadow: '0 2px 10px rgba(0, 0, 0, 0.25), 0 1px 3px rgba(0, 0, 0, 0.15)' }}
               >
                 {slides[currentImageIndex].title}
               </span>
               <span
-                className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-medium text-[#F7F3EE] tracking-normal leading-[1.1] block italic mt-1"
+                className="font-serif text-3xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-medium text-[#F7F3EE] tracking-normal leading-[1.1] block italic mt-1"
                 style={{ textShadow: '0 2px 10px rgba(0, 0, 0, 0.25), 0 1px 3px rgba(0, 0, 0, 0.15)' }}
               >
                 {slides[currentImageIndex].italicTitle}
@@ -130,29 +138,21 @@ export function HeroSection() {
           </motion.div>
         </AnimatePresence>
 
-        {/* Staggered action buttons remain stable and interactive outside AnimatePresence */}
-        <div className="mt-10 sm:mt-12 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 w-full sm:w-auto">
+        {/* Dynamic single action button remains stable and interactive */}
+        <div className="mt-10 sm:mt-12 w-full sm:w-auto flex justify-center z-10">
           <Button
             variant="primary-light"
             size="lg"
-            className="w-full sm:w-auto font-medium"
+            className="w-full sm:w-auto font-medium shadow-lg"
             onClick={() => {
-              const el = document.getElementById('collection-section');
-              if (el) el.scrollIntoView({ behavior: 'smooth' });
+              const targetId = slides[currentImageIndex].targetId;
+              const el = document.getElementById(targetId);
+              if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+              }
             }}
           >
-            Shop Collection
-          </Button>
-          <Button
-            variant="outline"
-            size="lg"
-            className="w-full sm:w-auto border-[#F7F3EE]/55 text-[#F7F3EE] hover:border-[#C8A97E] hover:text-[#C8A97E] hover:bg-[#F7F3EE]/5 bg-black/10 font-medium"
-            onClick={() => {
-              const el = document.getElementById('showcase-section');
-              if (el) el.scrollIntoView({ behavior: 'smooth' });
-            }}
-          >
-            Explore Fabrics
+            {slides[currentImageIndex].buttonText}
           </Button>
         </div>
       </div>
