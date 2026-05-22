@@ -10,7 +10,7 @@ export const categories: Category[] = [
     id: 'fabric-collection',
     title: 'Fabric Collection',
     description: 'Ultra-fine raw linen sourced from the historical lowlands of Normandy.',
-    image: '/src/assets/images/vian_fabric_showcase_1779434571577.png',
+    image: '/images/vian_fabric_showcase_1779434571577.png',
     href: '#fabrics'
   },
   {
@@ -24,7 +24,7 @@ export const categories: Category[] = [
     id: 'made-to-wear',
     title: 'Made To Order',
     description: 'Garments customized to your unique proportions with meticulous finish.',
-    image: '/src/assets/images/vian_tailoring_bespoke_1779434589378.png',
+    image: '/images/vian_tailoring_bespoke_1779434589378.png',
     href: '#made-to-order'
   },
   {

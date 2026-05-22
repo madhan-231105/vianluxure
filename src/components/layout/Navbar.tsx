@@ -44,7 +44,7 @@ export function Navbar() {
         id="navbar"
         className={`fixed top-0 inset-x-0 z-40 transition-all duration-500 ease-out ${
           isScrolled
-            ? 'bg-[#F7F3EE]/90 backdrop-blur-md border-b border-[#1A1A1A]/5 py-4 shadow-xs'
+            ? 'bg-[#F7F3EE]/95 backdrop-blur-md border-b border-[#1A1A1A]/5 py-4 shadow-sm'
             : 'bg-transparent py-6 sm:py-8'
         }`}
       >
@@ -56,14 +56,17 @@ export function Navbar() {
                 <a
                   key={link.label}
                   href={link.href}
-                  className="font-sans text-[11px] uppercase tracking-[0.2em] text-[#1A1A1A]/85 hover:text-[#C8A97E] transition-colors duration-400 font-medium relative py-1 group"
+                  className={`font-sans text-[11px] uppercase tracking-[0.2em] hover:text-[#C8A97E] transition-colors duration-500 font-semibold relative py-1 group ${
+                    isScrolled ? 'text-[#1A1A1A]/85' : 'text-[#F7F3EE]'
+                  }`}
+                  style={{ textShadow: isScrolled ? 'none' : '0 1px 4px rgba(0,0,0,0.35)' }}
                 >
                   {link.label}
                   <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#C8A97E] scale-x-0 group-hover:scale-x-100 transition-transform duration-400 origin-left" />
                 </a>
               ))}
             </div>
-
+ 
             {/* Mobile menu and search buttons - left side for small devices */}
             <div className="flex items-center lg:hidden gap-4">
               <button
@@ -71,52 +74,60 @@ export function Navbar() {
                 className="p-1 cursor-pointer hover:text-[#C8A97E] transition-colors"
                 aria-label="Open navigation menu"
               >
-                <Menu className="w-5 h-5 text-[#1A1A1A]" />
+                <Menu className={`w-5 h-5 transition-colors duration-500 ${isScrolled ? 'text-[#1A1A1A]' : 'text-[#F7F3EE]'}`} />
               </button>
               <button
                 onClick={() => setSearchOpen(true)}
                 className="p-1 cursor-pointer hover:text-[#C8A97E] transition-colors"
                 aria-label="Search"
               >
-                <Search className="w-4 h-4 text-[#1A1A1A]" />
+                <Search className={`w-4 h-4 transition-colors duration-500 ${isScrolled ? 'text-[#1A1A1A]' : 'text-[#F7F3EE]'}`} />
               </button>
             </div>
-
+ 
             {/* Center Brand Identity */}
             <a
               href="#"
               className="flex flex-col items-center select-none text-center group"
             >
-              <span className="font-serif text-xl sm:text-2xl md:text-3xl font-normal tracking-[0.3em] text-[#1A1A1A] group-hover:text-[#C8A97E] transition-colors duration-500 uppercase">
+              <span 
+                className={`font-serif text-xl sm:text-2xl md:text-3xl font-bold tracking-[0.3em] group-hover:text-[#C8A97E] transition-colors duration-500 uppercase ${
+                  isScrolled ? 'text-black' : 'text-[#F7F3EE]'
+                }`}
+                style={{ textShadow: isScrolled ? 'none' : '0 2px 8px rgba(0,0,0,0.35)' }}
+              >
                 Vian Luxure
               </span>
-              <span className="font-sans text-[7px] sm:text-[8px] uppercase tracking-[0.45em] text-[#C8A97E] font-semibold mt-0.5 sm:mt-1">
+              <span className="font-sans text-[7px] sm:text-[8px] uppercase tracking-[0.45em] text-[#C8A97E] font-bold mt-0.5 sm:mt-1">
                 La Collection d'Flax
               </span>
             </a>
-
+ 
             {/* Right Nav links - desktop */}
             <div className="hidden lg:flex items-center gap-8 xl:gap-11">
               {navLinks.slice(3).map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
-                  className="font-sans text-[11px] uppercase tracking-[0.2em] text-[#1A1A1A]/85 hover:text-[#C8A97E] transition-colors duration-400 font-medium relative py-1 group"
+                  className={`font-sans text-[11px] uppercase tracking-[0.2em] hover:text-[#C8A97E] transition-colors duration-500 font-semibold relative py-1 group ${
+                    isScrolled ? 'text-[#1A1A1A]/85' : 'text-[#F7F3EE]'
+                  }`}
+                  style={{ textShadow: isScrolled ? 'none' : '0 1px 4px rgba(0,0,0,0.35)' }}
                 >
                   {link.label}
                   <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#C8A97E] scale-x-0 group-hover:scale-x-100 transition-transform duration-400 origin-left" />
                 </a>
               ))}
               
-              <div className="h-4 w-[1px] bg-[#1A1A1A]/10 ml-2" />
-
+              <div className={`h-4 w-[1px] ml-2 transition-colors duration-500 ${isScrolled ? 'bg-[#1A1A1A]/10' : 'bg-[#F7F3EE]/25'}`} />
+ 
               <div className="flex items-center gap-5">
                 <button
                   onClick={() => setSearchOpen(true)}
                   className="p-1 cursor-pointer hover:text-[#C8A97E] transition-colors"
                   aria-label="Search"
                 >
-                  <Search className="w-4 h-4 text-[#1A1A1A]" />
+                  <Search className={`w-4 h-4 transition-colors duration-500 ${isScrolled ? 'text-[#1A1A1A]' : 'text-[#F7F3EE]'}`} />
                 </button>
                 <a
                   href="#profile"
@@ -124,21 +135,21 @@ export function Navbar() {
                   aria-label="Account details"
                   onClick={(e) => { e.preventDefault(); alert("Clients portal will launch soon."); }}
                 >
-                  <User className="w-4 h-4 text-[#1A1A1A]" />
+                  <User className={`w-4 h-4 transition-colors duration-500 ${isScrolled ? 'text-[#1A1A1A]' : 'text-[#F7F3EE]'}`} />
                 </a>
                 <button
                   onClick={() => alert("Your luxury selection bag is empty.")}
                   className="p-1 relative cursor-pointer hover:text-[#C8A97E] transition-colors"
                   aria-label="View bag"
                 >
-                  <ShoppingBag className="w-4 h-4 text-[#1A1A1A]" />
+                  <ShoppingBag className={`w-4 h-4 transition-colors duration-500 ${isScrolled ? 'text-[#1A1A1A]' : 'text-[#F7F3EE]'}`} />
                   <span className="absolute -top-1 -right-1.5 flex items-center justify-center bg-[#C8A97E] text-[#F7F3EE] font-mono text-[8px] h-3.5 w-3.5 rounded-full font-bold">
                     0
                   </span>
                 </button>
               </div>
             </div>
-
+ 
             {/* Mobile selection indicators - right side for small devices */}
             <div className="flex items-center lg:hidden gap-3.5">
               <a
@@ -147,14 +158,14 @@ export function Navbar() {
                 onClick={(e) => { e.preventDefault(); alert("Profile portal active in next release."); }}
                 aria-label="Account details"
               >
-                <User className="w-4.5 h-4.5 text-[#1A1A1A]" />
+                <User className={`w-4.5 h-4.5 transition-colors duration-500 ${isScrolled ? 'text-[#1A1A1A]' : 'text-[#F7F3EE]'}`} />
               </a>
               <button
                 onClick={() => alert("Your selection is currently empty.")}
                 className="p-1 relative cursor-pointer hover:text-[#C8A97E] transition-colors"
                 aria-label="View bag"
               >
-                <ShoppingBag className="w-4.5 h-4.5 text-[#1A1A1A]" />
+                <ShoppingBag className={`w-4.5 h-4.5 transition-colors duration-500 ${isScrolled ? 'text-[#1A1A1A]' : 'text-[#F7F3EE]'}`} />
                 <span className="absolute -top-1 -right-1.5 flex items-center justify-center bg-[#C8A97E] text-[#F7F3EE] font-mono text-[7px] h-3.5 w-3.5 rounded-full font-bold">
                   0
                 </span>

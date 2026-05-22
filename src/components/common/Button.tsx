@@ -10,7 +10,7 @@ import { motion } from 'motion/react';
 
 interface ButtonProps {
   children: React.ReactNode;
-  variant?: 'primary' | 'secondary' | 'outline' | 'text';
+  variant?: 'primary' | 'secondary' | 'primary-light' | 'outline' | 'text';
   size?: 'sm' | 'md' | 'lg';
   className?: string;
   asAnchor?: boolean;
@@ -43,31 +43,39 @@ export function Button({
   const variantClasses = {
     primary: 'bg-[#1A1A1A] text-[#F7F3EE] hover:bg-[#C8A97E] hover:text-[#1A1A1A]',
     secondary: 'bg-[#E8DED1] text-[#1A1A1A] hover:bg-[#C8A97E] hover:text-[#F7F3EE]',
+    'primary-light': 'bg-[#F7F3EE] text-[#1A1A1A] hover:bg-[#C8A97E] hover:text-[#1A1A1A]',
     outline: 'border border-[#1A1A1A]/30 text-[#1A1A1A] hover:border-[#C8A97E] hover:bg-[#C8A97E]/5 hover:text-[#C8A97E]',
     text: 'text-[#1A1A1A] relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-full after:scale-x-0 hover:after:scale-x-100 after:origin-bottom-left after:bg-[#1A1A1A] after:transition-transform after:duration-500',
   };
 
   const combinedClasses = `${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${className}`;
 
+  const animationProps = {
+    whileHover: { scale: 1.04, y: -2 },
+    whileTap: { scale: 0.97 },
+    transition: { type: "spring" as const, stiffness: 400, damping: 15 }
+  };
+
   if (asAnchor && href) {
     return (
-      <a
+      <motion.a
         href={href}
         className={combinedClasses}
         onClick={onClick as React.MouseEventHandler<HTMLAnchorElement>}
+        {...animationProps}
       >
         {children}
-      </a>
+      </motion.a>
     );
   }
 
   return (
     <motion.button
-      whileTap={{ scale: 0.98 }}
       className={combinedClasses}
       type={type}
       onClick={onClick as React.MouseEventHandler<HTMLButtonElement>}
       disabled={disabled}
+      {...animationProps}
       {...props}
     >
       {children}
