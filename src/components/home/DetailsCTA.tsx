@@ -54,13 +54,10 @@ export function DetailsCTA() {
           <div className="absolute -bottom-[1px] -right-[1px] w-8 h-8 border-b border-r border-[#C8A97E]" />
 
           {/* Top category label */}
-          <span className="font-mono text-[9px] text-[#C8A97E] uppercase tracking-[0.35em] font-bold block mb-6">
-            09 / Sartorial Swatches & Inquiry
-          </span>
 
           {/* Main Statement */}
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light text-[#F7F3EE] tracking-wide leading-tight max-w-2xl mx-auto mb-8">
-            Have a singular vision in mind?
+          Looking for Linen in Your Style?          
           </h2>
 
           {/* Accent thin line details */}
@@ -68,7 +65,7 @@ export function DetailsCTA() {
 
           {/* Secondary atmospheric explanation */}
           <p className="font-sans text-sm sm:text-base text-[#F7F3EE]/70 leading-relaxed font-light max-w-xl mx-auto mb-12">
-            Request our physical seasonal lookbook and genuine French flax raw fabric swatches to experience the heavy drape and raw density before ordering.
+          From ready-to-wear styles to personalized tailoring options, find linen shirts designed with natural fabrics and clean everyday detailing.
           </p>
 
           {/* Spring-loaded Action Button */}

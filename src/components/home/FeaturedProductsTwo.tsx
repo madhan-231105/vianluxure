@@ -12,7 +12,7 @@ import { Button } from '../common/Button';
 import { products } from '../../data/products';
 import { formatPrice } from '../../lib/utils';
 import { motion, AnimatePresence } from 'motion/react';
-import { ArrowRight, Sparkles, Heart } from 'lucide-react';
+import { ArrowRight, Sparkles, Heart, ShoppingBag } from 'lucide-react';
 import { Badge } from '../common/Badge';
 
 export function FeaturedProductsTwo() {
@@ -21,9 +21,12 @@ export function FeaturedProductsTwo() {
 
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [wishlist, setWishlist] = useState<Record<string, boolean>>({});
-  const [activeTab, setActiveTab] = useState<Record<string, 'description' | 'specifications'>>({
-    [featured[0].id]: 'description',
-    [featured[1].id]: 'description',
+  const [activeTab, setActiveTab] = useState<Record<string, 'description' | 'specifications'>>(() => {
+    const initial: Record<string, 'description' | 'specifications'> = {};
+    featured.forEach(p => {
+      initial[p.id] = 'description';
+    });
+    return initial;
   });
 
   const toggleWishlist = (id: string) => {
@@ -42,9 +45,8 @@ export function FeaturedProductsTwo() {
       <Container>
         <div className="mb-20 text-center">
           <SectionTitle
-            subtitle="07 / The Atelier Duet"
-            title="Featured Ensembles"
-            description="Two foundational unstructured masterworks meticulously handcrafted to work in absolute cohesion or command an independent presence."
+            subtitle="FEATURED"
+            title="Products"
             align="center"
           />
         </div>
@@ -88,27 +90,13 @@ export function FeaturedProductsTwo() {
                     />
                   </button>
 
-                  {/* Primary Image */}
+                  {/* Primary Image (Only 1 pic in each card with dynamic hover zoom) */}
                   <img
                     src={product.image}
                     alt={product.name}
                     referrerPolicy="no-referrer"
-                    className={`absolute inset-0 w-full h-full object-cover transition-transform duration-1000 ease-out select-none ${
-                      isHovered && product.secondaryImage ? 'opacity-0 scale-105' : 'opacity-100 scale-100'
-                    }`}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.2s] ease-out select-none group-hover:scale-[1.06]"
                   />
-
-                  {/* Secondary Image */}
-                  {product.secondaryImage && (
-                    <img
-                      src={product.secondaryImage}
-                      alt={`${product.name} alternate view`}
-                      referrerPolicy="no-referrer"
-                      className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ease-out select-none ${
-                        isHovered ? 'opacity-100 scale-105' : 'opacity-0 scale-100'
-                      }`}
-                    />
-                  )}
 
                   {/* Aesthetic frame overlays */}
                   <div className="absolute inset-6 border border-[#F7F3EE]/15 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
@@ -158,7 +146,7 @@ export function FeaturedProductsTwo() {
                   </div>
 
                   {/* Tab Contents with AnimatePresence */}
-                  <div className="h-32 overflow-hidden mb-8">
+                  <div className="min-h-[130px] sm:min-h-[145px] mb-8">
                     <AnimatePresence mode="wait">
                       {currentTab === 'description' ? (
                         <motion.p
@@ -192,7 +180,7 @@ export function FeaturedProductsTwo() {
                   </div>
 
                   {/* Actions */}
-                  <div className="mt-auto pt-6 border-t border-[#1A1A1A]/5 flex flex-col sm:flex-row gap-4 items-stretch sm:items-center justify-between">
+                  <div className="mt-auto pt-6 border-t border-[#1A1A1A]/5 flex flex-col xl:flex-row gap-4 items-stretch xl:items-center justify-between">
                     <div className="flex items-center gap-2">
                       <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                       <span className="text-[10px] tracking-wider text-[#1A1A1A]/50 font-mono">
@@ -200,16 +188,26 @@ export function FeaturedProductsTwo() {
                       </span>
                     </div>
 
-                    <Button
-                      variant="primary"
-                      size="md"
-                      onClick={() => alert(`Custom order inquiry received for ${product.name}. Our master clothier will contact you within 24 hours.`)}
-                      className="group"
-                    >
-                      <span className="flex items-center gap-2">
-                        Inquire & Order <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform duration-300" />
-                      </span>
-                    </Button>
+                    <div className="flex flex-wrap items-center gap-2.5">
+                      <Button
+                        variant="primary"
+                        size="sm"
+                        onClick={() => alert(`${product.name} has been added to your shopping cart.`)}
+                        className="group"
+                      >
+                        <span className="flex items-center gap-2">
+                          <ShoppingBag className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" /> Add to Cart
+                        </span>
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => alert(`Redirecting to details studio for ${product.name}...`)}
+                        className="group"
+                      >
+                        See Details
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </motion.div>

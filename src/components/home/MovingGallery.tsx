@@ -24,7 +24,7 @@ export function MovingGallery() {
     <section id="gallery-section" className="py-10 bg-[#F7F3EE] overflow-hidden border-b border-[#1A1A1A]/5 relative">
       {/* Decorative Top Line Details */}
       <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-[#C8A97E]/30 to-transparent" />
-      
+
       <div className="mb-10 text-center px-6">
         <span className="font-mono text-[9px] text-[#C8A97E] uppercase tracking-[0.35em] font-bold leading-none block mb-3">
           05 / L'Atelier Vivant
