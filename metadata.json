@@ -1,0 +1,8 @@
+{
+  "name": "Vian Luxure",
+  "description": "A premium quiet luxury fashion homepage for Vian Luxure, featuring high-end linen collections, bespoke tailoring experience, elegant animations, and cinematic visuals.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
