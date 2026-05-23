@@ -11,8 +11,7 @@ export const products: Product[] = [
     name: 'Best Linen Shirts for Men Pure Soft Linen in Red',
     price: 790,
     category: 'Ready To Wear',
-    image:
-      'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=600&auto=format&fit=crop',
+    image: '/images/product1.webp',
     secondaryImage:
       'https://images.unsplash.com/photo-1598033129183-c4f50c736f10?q=80&w=600&auto=format&fit=crop',
     description:
@@ -33,8 +32,7 @@ export const products: Product[] = [
     name: 'Normandy Pleated Linen Trousers',
     price: 390,
     category: 'Ready To Wear',
-    image:
-      'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=600&auto=format&fit=crop',
+    image: '/images/product2.webp',
     secondaryImage:
       'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?q=80&w=600&auto=format&fit=crop',
     description:

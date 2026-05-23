@@ -10,14 +10,14 @@ export const categories: Category[] = [
     id: 'Pure-Materials',
     title: 'Pure Materials',
     description: 'Explore pure linen and cotton fabrics designed for breathability, natural texture, and everyday wear, with lightweight finishes and timeless detailing suited for modern wardrobes.',
-    image: '/images/vian_fabric_showcase_1779434571577.png',
+    image: '/images/Category1.jpeg',
     href: '#fabrics'
   },
   {
     id: 'ready-to-wear',
     title: 'Effortless Everyday',
     description: 'Find ready-to-wear shirts designed with clean tailoring and everyday ease. Choose your preferred fabric, select your size and fit, and enjoy shirts made for regular wear.',
-    image: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=800&auto=format&fit=crop',
+    image: '/images/Category2.jpeg',
     href: '#ready-to-wear'
   },
   {

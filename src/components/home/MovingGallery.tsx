@@ -9,16 +9,14 @@ import React from 'react';
 
 export function MovingGallery() {
   const images = [
-    '/images/banner1.webp',
-    '/images/banner2.png',
-    '/images/banner3.png',
-    '/images/banner4.png',
-    '/images/bannerone.webp',
-    '/images/bannertwo.png',
+    '/images/imageshow.webp',
+    '/images/imageshow1.webp',
+    '/images/imageshow2.webp',
+    '/images/imageshow3.webp',
   ];
 
-  // Duplicate images list to enable endless looping marquee
-  const marqueeImages = [...images, ...images];
+  // Quadruple the images list to enable endless, gap-free looping marquee on all viewport widths
+  const marqueeImages = [...images, ...images, ...images, ...images];
 
   return (
     <section id="gallery-section" className="py-10 bg-[#F7F3EE] overflow-hidden border-b border-[#1A1A1A]/5 relative">

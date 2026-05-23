@@ -31,11 +31,10 @@ export function Navbar() {
   }, []);
 
   const navLinks = [
-    { label: 'Eternity Linen', href: '#collective' },
-    { label: 'Ready To Wear', href: '#ready-to-wear' },
-    { label: 'Bespoke Experience', href: '#tailoring' },
-    { label: 'Fabric Journal', href: '#journal' },
-    { label: 'Our Heritage', href: '#heritage' }
+    { label: 'Home', href: '/' },
+    { label: 'Shop', href: '#featured-products' },
+    { label: 'About Us', href: '#who-are-we' },
+    { label: 'Contact', href: '#details-cta' }
   ];
 
   return (
@@ -44,15 +43,15 @@ export function Navbar() {
         id="navbar"
         className={`fixed top-0 inset-x-0 z-40 transition-all duration-500 ease-out ${
           isScrolled
-            ? 'bg-[#F7F3EE]/95 backdrop-blur-md border-b border-[#1A1A1A]/5 py-4 shadow-sm'
+            ? 'bg-[#F7F3EE]/95 backdrop-blur-md border-b border-[#1A1A1A]/5 py-5 shadow-sm'
             : 'bg-transparent py-6 sm:py-8'
         }`}
       >
         <Container>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between relative">
             {/* Left Nav links - desktop */}
             <div className="hidden lg:flex items-center gap-5 xl:gap-11">
-              {navLinks.slice(0, 3).map((link) => (
+              {navLinks.slice(0, 2).map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
@@ -85,27 +84,30 @@ export function Navbar() {
               </button>
             </div>
  
-            {/* Center Brand Identity */}
+            {/* Center Brand Identity (Truly Centered Relative to Screen Width) */}
             <a
               href="#"
-              className="flex flex-col items-center select-none text-center group"
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center select-none text-center group z-10"
             >
-              <span 
-                className={`font-serif text-xl sm:text-2xl md:text-3xl font-bold tracking-[0.3em] group-hover:text-[#C8A97E] transition-colors duration-500 uppercase ${
-                  isScrolled ? 'text-black' : 'text-[#F7F3EE]'
-                }`}
-                style={{ textShadow: isScrolled ? 'none' : '0 2px 8px rgba(0,0,0,0.35)' }}
-              >
+              <div className="flex items-center gap-2">
+                <img src="/images/FooterLogo.svg" alt="VL Global Logo" className="w-7 h-7 object-contain" />
+                <span 
+                  className={`font-serif text-xl sm:text-2xl md:text-3xl font-bold tracking-[0.3em] group-hover:text-[#C8A97E] transition-colors duration-500 uppercase leading-none ${
+                    isScrolled ? 'text-black' : 'text-[#F7F3EE]'
+                  }`}
+                  style={{ textShadow: isScrolled ? 'none' : '0 2px 8px rgba(0,0,0,0.35)' }}
+                >
+                  VL Global
+                </span>
+              </div>
+              <span className="font-sans text-[7px] sm:text-[8px] uppercase tracking-[0.45em] text-[#C8A97E] font-bold mt-1">
                 Vian Luxure
-              </span>
-              <span className="font-sans text-[7px] sm:text-[8px] uppercase tracking-[0.45em] text-[#C8A97E] font-bold mt-0.5 sm:mt-1">
-                La Collection d'Flax
               </span>
             </a>
  
             {/* Right Nav links - desktop */}
             <div className="hidden lg:flex items-center gap-5 xl:gap-11">
-              {navLinks.slice(3).map((link) => (
+              {navLinks.slice(2).map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
