@@ -14,7 +14,7 @@ import { loadGsap, refreshScrollTriggers } from '@/src/lib/gsap';
 
 const slides = [
   {
-    image: "/images/banner1.webp",
+    image: "/videos/banner3.webm",
     subtitle: "01 / Ready To Wear Atelier",
     title: "Ready Shirts",
     italicTitle: "For Everyday Wear.",
@@ -32,7 +32,7 @@ const slides = [
     targetId: "featured-products"
   },
   {
-    image: "/videos/banner3.webm",
+    image: "/images/banner1.webp",
     subtitle: "03 / Tailor Customizations",
     title: "Choose The Details",
     italicTitle: "You Like.",
@@ -56,12 +56,15 @@ export function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const parallaxRef = useRef<HTMLDivElement>(null);
 
+  // Dynamic Timeout: Play video slide for 8 seconds, others for 6 seconds
   useEffect(() => {
-    const timer = setInterval(() => {
+    const isVideo = slides[currentImageIndex].image.endsWith('.webm');
+    const delay = isVideo ? 8000 : 6000;
+    const timer = setTimeout(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % slides.length);
-    }, 6000);
-    return () => clearInterval(timer);
-  }, []);
+    }, delay);
+    return () => clearTimeout(timer);
+  }, [currentImageIndex]);
 
   // Preload all hero banners so cross-fades never show an empty frame
   useEffect(() => {
@@ -142,41 +145,37 @@ export function HeroSection() {
                 key={slide.image}
                 initial={false}
                 animate={{ opacity: currentImageIndex === index ? 1 : 0 }}
-                transition={{ duration: 1.4, ease: 'easeInOut' }}
+                transition={{ duration: 1.8, ease: 'easeInOut' }}
                 className="absolute inset-0 w-full h-full"
                 style={{ zIndex: currentImageIndex === index ? 2 : 1 }}
                 aria-hidden={currentImageIndex !== index}
               >
                 {isVideo ? (
-                  currentImageIndex === index ? (
-                    <video
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      preload="metadata"
-                      ref={(el) => {
-                        if (el) {
-                          el.muted = true;
-                          el.play().catch((err) => {
-                            console.warn("Autoplay blocked or interrupted:", err);
-                          });
-                        }
-                      }}
-                      className="absolute inset-0 w-full h-full object-cover select-none bg-[#1A1A1A]"
-                    >
-                      <source src={slide.image} type="video/webm" />
-                    </video>
-                  ) : (
-                    <div className="absolute inset-0 w-full h-full bg-[#1A1A1A]" />
-                  )
+                  <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    ref={(el) => {
+                      if (el) {
+                        el.muted = true;
+                        el.play().catch((err) => {
+                          console.warn("Autoplay blocked or interrupted:", err);
+                        });
+                      }
+                    }}
+                    className="absolute inset-0 w-full h-full object-cover select-none bg-[#1A1A1A]"
+                  >
+                    <source src={slide.image} type="video/webm" />
+                  </video>
                 ) : (
                   <Image
                     src={slide.image}
                     alt={`Vian Luxure Quiet Luxury Linen ${index + 1}`}
                     fill
-                    priority={index === 0}
-                    loading={index === 0 ? undefined : 'eager'}
+                    priority={index === 2}
+                    loading={index === 2 ? undefined : 'eager'}
                     quality={75}
                     sizes="100vw"
                     className="object-cover object-center select-none bg-[#1A1A1A]"

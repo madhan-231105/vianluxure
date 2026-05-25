@@ -18,6 +18,8 @@ interface ButtonProps {
   onClick?: (event: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => void;
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
+  target?: string;
+  rel?: string;
 }
 
 export function Button({
@@ -30,6 +32,8 @@ export function Button({
   onClick,
   type = 'button',
   disabled = false,
+  target,
+  rel,
   ...props
 }: ButtonProps) {
   const baseClasses = 'inline-flex items-center justify-center font-sans uppercase tracking-[0.15em] text-xs transition-all duration-500 ease-out select-none cursor-pointer';
@@ -62,6 +66,8 @@ export function Button({
         href={href}
         className={combinedClasses}
         onClick={onClick as React.MouseEventHandler<HTMLAnchorElement>}
+        target={target}
+        rel={rel}
         {...animationProps}
       >
         {children}
