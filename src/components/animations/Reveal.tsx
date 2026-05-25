@@ -36,27 +36,17 @@ export function Reveal({
         {children}
       </motion.div>
       <motion.div
-        initial={
-          isHorizontal
-            ? { left: '0%', width: '0%' }
-            : { top: '0%', height: '0%' }
-        }
+        initial={{ scaleX: isHorizontal ? 0 : 1, scaleY: isHorizontal ? 1 : 0, originX: 0, originY: 0 }}
         whileInView={
           isHorizontal
-            ? {
-                left: ['0%', '0%', '100%'],
-                width: ['0%', '100%', '0%'],
-              }
-            : {
-                top: ['0%', '0%', '100%'],
-                height: ['0%', '100%', '0%'],
-              }
+            ? { scaleX: [0, 1, 0], originX: [0, 0, 1] }
+            : { scaleY: [0, 1, 0], originY: [0, 0, 1] }
         }
         viewport={{ once: true, margin: '-5%' }}
         transition={{
           duration,
           delay,
-          ease: [0.76, 0, 0.24, 1], // cinematic slow ease-in-out
+          ease: [0.76, 0, 0.24, 1],
         }}
         className="absolute inset-0 bg-[#C8A97E] z-10"
       />

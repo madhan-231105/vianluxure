@@ -60,10 +60,10 @@ export function FeaturedProductsTwo() {
             return (
               <motion.div
                 key={product.id}
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 25 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
-                transition={{ duration: 1.2, delay: idx * 0.2, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.7, delay: idx * 0.15, ease: [0.16, 1, 0.3, 1] }}
                 className="flex flex-col h-full bg-[#E8DED1]/20 border border-[#1A1A1A]/5 relative"
                 onMouseEnter={() => setHoveredIndex(idx)}
                 onMouseLeave={() => setHoveredIndex(null)}
@@ -95,6 +95,7 @@ export function FeaturedProductsTwo() {
                     src={product.image}
                     alt={product.name}
                     referrerPolicy="no-referrer"
+                    loading="lazy"
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.2s] ease-out select-none group-hover:scale-[1.06]"
                   />
 

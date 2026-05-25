@@ -1,11 +1,13 @@
-"use client";
-
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
  */
 
+// Server Component — no client-side hooks or browser APIs used.
+// Marquee CSS is defined in globals.css.
+
 import React from 'react';
+import { ArchPathScroll } from './ArchPathScroll';
 
 export function MovingGallery() {
   const images = [
@@ -19,13 +21,13 @@ export function MovingGallery() {
   const marqueeImages = [...images, ...images, ...images, ...images];
 
   return (
-    <section id="gallery-section" className="py-10 bg-[#F7F3EE] overflow-hidden border-b border-[#1A1A1A]/5 relative">
+    <section id="gallery-section" className="py-10 bg-[#F7F3EE] overflow-x-hidden border-b border-[#1A1A1A]/5 relative">
       {/* Decorative Top Line Details */}
       <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-[#C8A97E]/30 to-transparent" />
 
       <div className="mb-10 text-center px-6">
         <span className="font-mono text-[9px] text-[#C8A97E] uppercase tracking-[0.35em] font-bold leading-none block mb-3">
-          05 / L'Atelier Vivant
+          05 / L&apos;Atelier Vivant
         </span>
         <h2 className="font-serif text-2xl sm:text-3xl font-light text-[#1A1A1A] tracking-wider leading-none">
           The Moving Gallery
@@ -42,9 +44,9 @@ export function MovingGallery() {
             >
               <img
                 src={src}
-                alt={`Vian Gallery Image ${index + 1}`}
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover object-center transition-transform duration-1000 ease-out hover:scale-102"
+                alt={`Vian Gallery Image ${(index % images.length) + 1}`}
+                className="w-full h-full object-cover object-center"
+                loading="lazy"
               />
               <div className="absolute inset-0 bg-[#1A1A1A]/5" />
             </div>
@@ -54,26 +56,6 @@ export function MovingGallery() {
 
       {/* Decorative Bottom Line Details */}
       <div className="absolute bottom-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-[#C8A97E]/30 to-transparent" />
-
-      {/* CSS Stylesheet injection to run clean infinite animation loop */}
-      <style jsx global>{`
-        @keyframes marquee {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
-        
-        .animate-marquee {
-          animation: marquee 45s linear infinite;
-        }
-        
-        .animate-marquee:hover {
-          animation-play-state: paused;
-        }
-      `}</style>
     </section>
   );
 }

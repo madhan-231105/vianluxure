@@ -5,10 +5,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
 import { Button } from '../common/Button';
 import { ArrowDown } from 'lucide-react';
+import Image from 'next/image';
+import { loadGsap, refreshScrollTriggers } from '@/src/lib/gsap';
 
 const slides = [
   {
@@ -21,7 +23,7 @@ const slides = [
     targetId: "collective"
   },
   {
-    image: "/images/banner2.png",
+    image: "/images/banner2.webp",
     subtitle: "02 / Signature Daily Fit",
     title: "Ready Shirts",
     italicTitle: "For Everyday Wear.",
@@ -30,7 +32,7 @@ const slides = [
     targetId: "featured-products"
   },
   {
-    image: "/images/banner3.png",
+    image: "/videos/banner3.webm",
     subtitle: "03 / Tailor Customizations",
     title: "Choose The Details",
     italicTitle: "You Like.",
@@ -39,7 +41,7 @@ const slides = [
     targetId: "collective"
   },
   {
-    image: "/images/banner4.png",
+    image: "/images/banner4.webp",
     subtitle: "04 / Personalized Artisanal Fits",
     title: "Shirts Made Around",
     italicTitle: "Your Measurements.",
@@ -51,12 +53,67 @@ const slides = [
 
 export function HeroSection() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+  const parallaxRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % slides.length);
     }, 6000);
     return () => clearInterval(timer);
+  }, []);
+
+  // Preload all hero banners so cross-fades never show an empty frame
+  useEffect(() => {
+    slides.forEach((slide) => {
+      if (!slide.image.endsWith('.webm')) {
+        const img = new window.Image();
+        img.src = slide.image;
+      }
+    });
+  }, []);
+
+  useLayoutEffect(() => {
+    const section = sectionRef.current;
+    const parallax = parallaxRef.current;
+    if (!section || !parallax) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    let ctx: { revert: () => void } | null = null;
+    let cancelled = false;
+
+    loadGsap().then((lib) => {
+      if (!lib || cancelled) return;
+      const { gsap } = lib;
+
+      ctx = gsap.context(() => {
+        gsap.set(parallax, { scale: 1, y: 0, force3D: true });
+
+        gsap.to(parallax, {
+          scale: 1.22,
+          y: 90,
+          ease: 'none',
+          force3D: true,
+          scrollTrigger: {
+            trigger: section,
+            start: 'top top',
+            end: () => `+=${Math.round(window.innerHeight * 0.95)}`,
+            pin: true,
+            pinSpacing: true,
+            scrub: 0.5,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        refreshScrollTriggers();
+      }, section);
+    });
+
+    return () => {
+      cancelled = true;
+      ctx?.revert();
+    };
   }, []);
 
   const scrollToExplore = () => {
@@ -67,27 +124,69 @@ export function HeroSection() {
   };
 
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden bg-[#E8DED1]">
-      {/* Background cinematic imagery with smooth opacity cross-fade and scale transition */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        <AnimatePresence mode="popLayout">
-          <motion.div
-            key={currentImageIndex}
-            initial={{ opacity: 0, scale: 1.08 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 2.0, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute inset-0 w-full h-full"
-          >
-            <img
-              src={slides[currentImageIndex].image}
-              alt={`Vian Luxure Quiet Luxury Linen ${currentImageIndex + 1}`}
-              referrerPolicy="no-referrer"
-              className="w-full h-full object-cover object-center select-none"
-            />
-          </motion.div>
-        </AnimatePresence>
-        {/* Dark cinematic overlay that keeps the background banner images crisp, vivid, and highly visible without any washed-out faded look */}
+    <section
+      ref={sectionRef}
+      id="hero-section"
+      className="relative h-screen flex items-center justify-center overflow-hidden bg-[#1A1A1A]"
+    >
+      {/* Background: stacked cross-fade (no wait gap) + GSAP scroll scrub */}
+      <div className="absolute inset-0 z-0 overflow-hidden bg-[#1A1A1A]">
+        <div
+          ref={parallaxRef}
+          className="absolute inset-0 w-full h-[130%] -top-[15%] will-change-transform origin-center"
+        >
+          {slides.map((slide, index) => {
+            const isVideo = slide.image.endsWith('.webm');
+            return (
+              <motion.div
+                key={slide.image}
+                initial={false}
+                animate={{ opacity: currentImageIndex === index ? 1 : 0 }}
+                transition={{ duration: 1.4, ease: 'easeInOut' }}
+                className="absolute inset-0 w-full h-full"
+                style={{ zIndex: currentImageIndex === index ? 2 : 1 }}
+                aria-hidden={currentImageIndex !== index}
+              >
+                {isVideo ? (
+                  currentImageIndex === index ? (
+                    <video
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      preload="metadata"
+                      ref={(el) => {
+                        if (el) {
+                          el.muted = true;
+                          el.play().catch((err) => {
+                            console.warn("Autoplay blocked or interrupted:", err);
+                          });
+                        }
+                      }}
+                      className="absolute inset-0 w-full h-full object-cover select-none bg-[#1A1A1A]"
+                    >
+                      <source src={slide.image} type="video/webm" />
+                    </video>
+                  ) : (
+                    <div className="absolute inset-0 w-full h-full bg-[#1A1A1A]" />
+                  )
+                ) : (
+                  <Image
+                    src={slide.image}
+                    alt={`Vian Luxure Quiet Luxury Linen ${index + 1}`}
+                    fill
+                    priority={index === 0}
+                    loading={index === 0 ? undefined : 'eager'}
+                    quality={75}
+                    sizes="100vw"
+                    className="object-cover object-center select-none bg-[#1A1A1A]"
+                  />
+                )}
+              </motion.div>
+            );
+          })}
+        </div>
+        {/* Dark cinematic overlay — fixed, not parallaxed */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/15 to-black/50 z-[1]" />
       </div>
 
@@ -101,13 +200,13 @@ export function HeroSection() {
         <AnimatePresence mode="wait">
           <motion.div
             key={currentImageIndex}
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -15 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
             className="flex flex-col items-center"
           >
-            {/* Subtitle letter-stagger */}
+            {/* Subtitle */}
             <span className="font-sans text-[11px] sm:text-xs text-[#C8A97E] uppercase tracking-[0.35em] font-bold mb-5 sm:mb-6 leading-none">
               {slides[currentImageIndex].subtitle}
             </span>
@@ -138,7 +237,7 @@ export function HeroSection() {
           </motion.div>
         </AnimatePresence>
 
-        {/* Dynamic single action button remains stable and interactive */}
+        {/* Dynamic single action button */}
         <div className="mt-10 sm:mt-12 w-full sm:w-auto flex justify-center z-10">
           <Button
             variant="primary-light"
@@ -166,7 +265,6 @@ export function HeroSection() {
             className="group relative py-3 px-1 focus:outline-none cursor-pointer"
             aria-label={`Go to slide ${index + 1}`}
           >
-            {/* The elegant aesthetic dot indicator */}
             <div className={`h-[2px] transition-all duration-700 ease-out bg-[#F7F3EE] ${
               index === currentImageIndex 
                 ? 'w-10 opacity-80' 
@@ -176,23 +274,21 @@ export function HeroSection() {
         ))}
       </div>
 
-      {/* Floating coordinates indicator (Slightly technical styling removed contextually, replaced by pure design aesthetic coordinates) */}
+      {/* Floating coordinates indicator */}
       <div className="absolute bottom-10 right-6 sm:right-12 z-10 hidden sm:flex items-center gap-3">
         <span className="font-mono text-[9px] text-[#F7F3EE]/60 tracking-widest uppercase">
           N° 49.82 CAEN, NORMANDY
         </span>
       </div>
 
-      {/* Animated micro-bouncing scroll indicator */}
-      <motion.button
-        animate={{ y: [0, 8, 0] }}
-        transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }}
+      {/* Micro-bouncing scroll indicator */}
+      <button
         onClick={scrollToExplore}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 p-2 text-[#F7F3EE]/70 hover:text-[#C8A97E] transition-colors cursor-pointer"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 p-2 text-[#F7F3EE]/70 hover:text-[#C8A97E] transition-colors cursor-pointer animate-bounce"
         aria-label="Scroll to content"
       >
         <ArrowDown className="w-5 h-5 stroke-[1.5]" />
-      </motion.button>
+      </button>
     </section>
   );
 }

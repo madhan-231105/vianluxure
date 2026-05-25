@@ -8,11 +8,16 @@
 import { useState, useEffect } from 'react';
 import React from 'react';
 import { Menu, X, Search, ShoppingBag, User, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 import { Container } from '../common/Container';
 import { Button } from '../common/Button';
+import dynamic from 'next/dynamic';
+
+const ClientPortalModal = dynamic(() => import('./ClientPortalModal').then(m => m.ClientPortalModal), { ssr: false });
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [clientPortalOpen, setClientPortalOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -32,9 +37,9 @@ export function Navbar() {
 
   const navLinks = [
     { label: 'Home', href: '/' },
-    { label: 'Shop', href: '#featured-products' },
-    { label: 'About Us', href: '#who-are-we' },
-    { label: 'Contact', href: '#details-cta' }
+    { label: 'Shop', href: '/shop' },
+    { label: 'About Us', href: '/aboutus' },
+    { label: 'Contact', href: '/contact' }
   ];
 
   return (
@@ -48,11 +53,11 @@ export function Navbar() {
         }`}
       >
         <Container>
-          <div className="flex items-center justify-between relative">
+          <div className="flex items-center justify-between relative w-full">
             {/* Left Nav links - desktop */}
-            <div className="hidden lg:flex items-center gap-5 xl:gap-11">
+            <div className="hidden lg:flex flex-1 justify-end items-center gap-5 xl:gap-11 lg:pr-32 xl:pr-48">
               {navLinks.slice(0, 2).map((link) => (
-                <a
+                <Link
                   key={link.label}
                   href={link.href}
                   className={`font-sans text-[10px] xl:text-[11px] uppercase tracking-[0.2em] hover:text-[#C8A97E] transition-colors duration-500 font-semibold relative py-1 group ${
@@ -62,7 +67,7 @@ export function Navbar() {
                 >
                   {link.label}
                   <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#C8A97E] scale-x-0 group-hover:scale-x-100 transition-transform duration-400 origin-left" />
-                </a>
+                </Link>
               ))}
             </div>
  
@@ -85,8 +90,8 @@ export function Navbar() {
             </div>
  
             {/* Center Brand Identity (Truly Centered Relative to Screen Width) */}
-            <a
-              href="#"
+            <Link
+              href="/"
               className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center select-none text-center group z-10"
             >
               <div className="flex items-center gap-2">
@@ -103,12 +108,12 @@ export function Navbar() {
               <span className="font-sans text-[7px] sm:text-[8px] uppercase tracking-[0.45em] text-[#C8A97E] font-bold mt-1">
                 Vian Luxure
               </span>
-            </a>
+            </Link>
  
             {/* Right Nav links - desktop */}
-            <div className="hidden lg:flex items-center gap-5 xl:gap-11">
+            <div className="hidden lg:flex flex-1 justify-start items-center gap-5 xl:gap-11 lg:pl-32 xl:pl-48">
               {navLinks.slice(2).map((link) => (
-                <a
+                <Link
                   key={link.label}
                   href={link.href}
                   className={`font-sans text-[10px] xl:text-[11px] uppercase tracking-[0.2em] hover:text-[#C8A97E] transition-colors duration-500 font-semibold relative py-1 group ${
@@ -118,7 +123,7 @@ export function Navbar() {
                 >
                   {link.label}
                   <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#C8A97E] scale-x-0 group-hover:scale-x-100 transition-transform duration-400 origin-left" />
-                </a>
+                </Link>
               ))}
               
               <div className={`h-4 w-[1px] ml-2 transition-colors duration-500 ${isScrolled ? 'bg-[#1A1A1A]/10' : 'bg-[#F7F3EE]/25'}`} />
@@ -131,14 +136,13 @@ export function Navbar() {
                 >
                   <Search className={`w-4 h-4 transition-colors duration-500 ${isScrolled ? 'text-[#1A1A1A]' : 'text-[#F7F3EE]'}`} />
                 </button>
-                <a
-                  href="#profile"
-                  className="p-1 cursor-pointer hover:text-[#C8A97E] transition-colors"
+                <button
+                  onClick={() => setClientPortalOpen(true)}
+                  className="p-1 cursor-pointer hover:text-[#C8A97E] transition-colors cursor-pointer"
                   aria-label="Account details"
-                  onClick={(e) => { e.preventDefault(); alert("Clients portal will launch soon."); }}
                 >
                   <User className={`w-4 h-4 transition-colors duration-500 ${isScrolled ? 'text-[#1A1A1A]' : 'text-[#F7F3EE]'}`} />
-                </a>
+                </button>
                 <button
                   onClick={() => alert("Your luxury selection bag is empty.")}
                   className="p-1 relative cursor-pointer hover:text-[#C8A97E] transition-colors"
@@ -154,14 +158,13 @@ export function Navbar() {
  
             {/* Mobile selection indicators - right side for small devices */}
             <div className="flex items-center lg:hidden gap-3.5">
-              <a
-                href="#profile"
-                className="p-1 cursor-pointer hover:text-[#C8A97E] transition-colors"
-                onClick={(e) => { e.preventDefault(); alert("Profile portal active in next release."); }}
+              <button
+                onClick={() => setClientPortalOpen(true)}
+                className="p-1 cursor-pointer hover:text-[#C8A97E] transition-colors cursor-pointer"
                 aria-label="Account details"
               >
                 <User className={`w-4.5 h-4.5 transition-colors duration-500 ${isScrolled ? 'text-[#1A1A1A]' : 'text-[#F7F3EE]'}`} />
-              </a>
+              </button>
               <button
                 onClick={() => alert("Your selection is currently empty.")}
                 className="p-1 relative cursor-pointer hover:text-[#C8A97E] transition-colors"
@@ -211,7 +214,7 @@ export function Navbar() {
 
             <div className="flex flex-col gap-6">
               {navLinks.map((link, idx) => (
-                <a
+                <Link
                   key={link.label}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
@@ -219,7 +222,7 @@ export function Navbar() {
                 >
                   <span className="text-[#C8A97E]/60 text-xs font-mono mr-3">0{idx + 1}</span>
                   {link.label}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -233,7 +236,7 @@ export function Navbar() {
               size="sm"
               className="w-full"
               asAnchor
-              href="#bespoke"
+              href="/contact"
               onClick={() => setMobileMenuOpen(false)}
             >
               Request Consultation
@@ -297,6 +300,7 @@ export function Navbar() {
           </div>
         </div>
       </div>
+      <ClientPortalModal isOpen={clientPortalOpen} onClose={() => setClientPortalOpen(false)} />
     </>
   );
 }

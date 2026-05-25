@@ -16,9 +16,10 @@ export function FabricShowcase() {
       {/* Fabric image backdrop */}
       <div className="absolute inset-0 z-0 opacity-60">
         <img
-          src="/images/vian_fabric_showcase_1779434571577.png"
+          src="/images/vian_fabric_showcase_1779434571577.webp"
           alt="Premium raw French flax linen texture close-up"
           referrerPolicy="no-referrer"
+          loading="lazy"
           className="w-full h-full object-cover object-center scale-102 hover:scale-105 transition-transform duration-[4000ms] ease-out-quint select-none"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />

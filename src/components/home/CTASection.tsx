@@ -46,9 +46,10 @@ export function CTASection() {
               <div className="absolute inset-0 bg-[#C8A97E]/10 translate-x-4 translate-y-4 -z-10 transition-transform duration-500 group-hover:translate-x-2 group-hover:translate-y-2" />
               <div className="aspect-[3/4] overflow-hidden bg-gray-100 border border-[#1A1A1A]/5">
                 <img
-                  src="/images/vian_tailoring_bespoke_1779434589378.png"
+                  src="/images/vian_tailoring_bespoke_1779434589378.webp"
                   alt="Tailor's room in private Vian Luxure Sunlit Atelier"
                   referrerPolicy="no-referrer"
+                  loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-103"
                 />
               </div>

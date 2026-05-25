@@ -20,9 +20,9 @@ interface FadeUpProps {
 export function FadeUp({
   children,
   delay = 0,
-  duration = 0.8,
+  duration = 0.6,
   className = '',
-  y = 30,
+  y = 20,
 }: FadeUpProps) {
   return (
     <motion.div

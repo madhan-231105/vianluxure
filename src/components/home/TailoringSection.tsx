@@ -8,8 +8,7 @@ import { Container } from '../common/Container';
 import { SectionTitle } from '../common/SectionTitle';
 import { FadeUp } from '../animations/FadeUp';
 import { Button } from '../common/Button';
-import { Paintbrush, Ruler, Compass, Sparkles } from 'lucide-react';
-import { motion } from 'motion/react';
+import { Paintbrush, Ruler, Compass } from 'lucide-react';
 
 export function TailoringSection() {
   const steps = [

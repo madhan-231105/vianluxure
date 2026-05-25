@@ -1,11 +1,8 @@
-"use client";
-
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState } from 'react';
 import React from 'react';
 import { Category } from '../../types';
 import { ArrowRight } from 'lucide-react';
@@ -16,13 +13,10 @@ interface CategoryCardProps {
 }
 
 export function CategoryCard({ category, index }: CategoryCardProps) {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
     <a
       href={category.href}
       className="group relative block w-full aspect-[4/5] sm:aspect-[3/4] overflow-hidden bg-[#1A1A1A]"
-      onMouseEnter={() => setIsHovered(false)} // handled beautifully via Tailwind group selectors
     >
       {/* Background Cinematic Image with zoom */}
       <img

@@ -1,5 +1,3 @@
-"use client";
-
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
@@ -16,10 +14,6 @@ const XIcon = () => (
 );
 
 export function Footer() {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   return (
     <footer className="bg-[#1A1A1A] text-[#F7F3EE] pt-24 pb-12 overflow-hidden border-t border-[#F7F3EE]/5">
       <Container>
@@ -80,9 +74,9 @@ export function Footer() {
               </h4>
               <ul className="space-y-4 font-sans text-xs sm:text-sm font-light text-[#F7F3EE]/65">
                 <li><a href="/" className="hover:text-[#F7F3EE] transition-colors">Home</a></li>
-                <li><a href="#featured-products" className="hover:text-[#F7F3EE] transition-colors">Shop</a></li>
-                <li><a href="#who-are-we" className="hover:text-[#F7F3EE] transition-colors">About Us</a></li>
-                <li><a href="#details-cta" className="hover:text-[#F7F3EE] transition-colors">Contact US</a></li>
+                <li><a href="/shop" className="hover:text-[#F7F3EE] transition-colors">Shop</a></li>
+                <li><a href="/aboutus" className="hover:text-[#F7F3EE] transition-colors">About Us</a></li>
+                <li><a href="/contact" className="hover:text-[#F7F3EE] transition-colors">Contact US</a></li>
               </ul>
             </div>
 
@@ -127,17 +121,18 @@ export function Footer() {
 
         {/* Lower Layout: Copyright & Back To Top */}
         <div className="flex flex-col sm:flex-row items-center justify-between pt-12 text-[#F7F3EE]/40 text-[11px] font-sans">
-          <span>&copy; {new Date().getFullYear()} VIAN LUXURE S.P.A. ALL RIGHTS RESERVED.</span>
+          <span>&copy; 2025 | All Rights Reserved by VL Global. Designed by Xplore Intellects</span>
           
-          <button
-            onClick={scrollToTop}
-            className="group flex items-center gap-2 text-[#C8A97E] text-[10px] uppercase font-sans tracking-[0.2em] font-semibold mt-6 sm:mt-0 transition-opacity hover:opacity-80 cursor-pointer"
+          <a
+            href="#"
+            className="group flex items-center gap-2 text-[#C8A97E] text-[10px] uppercase font-sans tracking-[0.2em] font-semibold mt-6 sm:mt-0 transition-opacity hover:opacity-80"
+            aria-label="Back to top"
           >
             <span>Back To Top</span>
             <span className="p-1.5 border border-[#C8A97E]/30 rounded-full group-hover:-translate-y-1 transition-transform duration-300">
               <ArrowUp className="w-3" />
             </span>
-          </button>
+          </a>
         </div>
       </Container>
     </footer>
