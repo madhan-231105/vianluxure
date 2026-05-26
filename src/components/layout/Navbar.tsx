@@ -15,7 +15,11 @@ import dynamic from 'next/dynamic';
 
 const ClientPortalModal = dynamic(() => import('./ClientPortalModal').then(m => m.ClientPortalModal), { ssr: false });
 
-export function Navbar() {
+interface NavbarProps {
+  theme?: 'light' | 'dark';
+}
+
+export function Navbar({ theme = 'dark' }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [clientPortalOpen, setClientPortalOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -42,12 +46,14 @@ export function Navbar() {
     { label: 'Contact', href: '/contact' }
   ];
 
+  const showSolidNav = isScrolled || theme === 'light';
+
   return (
     <>
       <nav
         id="navbar"
         className={`fixed top-0 inset-x-0 z-40 transition-all duration-500 ease-out ${
-          isScrolled
+          showSolidNav
             ? 'bg-[#F7F3EE]/95 backdrop-blur-md border-b border-[#1A1A1A]/5 py-5 shadow-sm'
             : 'bg-transparent py-6 sm:py-8'
         }`}
@@ -61,9 +67,9 @@ export function Navbar() {
                   key={link.label}
                   href={link.href}
                   className={`font-sans text-[10px] xl:text-[11px] uppercase tracking-[0.2em] hover:text-[#C8A97E] transition-colors duration-500 font-semibold relative py-1 group ${
-                    isScrolled ? 'text-[#1A1A1A]/85' : 'text-[#F7F3EE]'
+                    showSolidNav ? 'text-[#1A1A1A]/85' : 'text-[#F7F3EE]'
                   }`}
-                  style={{ textShadow: isScrolled ? 'none' : '0 1px 4px rgba(0,0,0,0.35)' }}
+                  style={{ textShadow: showSolidNav ? 'none' : '0 1px 4px rgba(0,0,0,0.35)' }}
                 >
                   {link.label}
                   <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#C8A97E] scale-x-0 group-hover:scale-x-100 transition-transform duration-400 origin-left" />
@@ -78,14 +84,14 @@ export function Navbar() {
                 className="p-1 cursor-pointer hover:text-[#C8A97E] transition-colors"
                 aria-label="Open navigation menu"
               >
-                <Menu className={`w-5 h-5 transition-colors duration-500 ${isScrolled ? 'text-[#1A1A1A]' : 'text-[#F7F3EE]'}`} />
+                <Menu className={`w-5 h-5 transition-colors duration-500 ${showSolidNav ? 'text-[#1A1A1A]' : 'text-[#F7F7EE]'}`} />
               </button>
               <button
                 onClick={() => setSearchOpen(true)}
                 className="p-1 cursor-pointer hover:text-[#C8A97E] transition-colors"
                 aria-label="Search"
               >
-                <Search className={`w-4 h-4 transition-colors duration-500 ${isScrolled ? 'text-[#1A1A1A]' : 'text-[#F7F3EE]'}`} />
+                <Search className={`w-4 h-4 transition-colors duration-500 ${showSolidNav ? 'text-[#1A1A1A]' : 'text-[#F7F3EE]'}`} />
               </button>
             </div>
  
@@ -98,9 +104,9 @@ export function Navbar() {
                 <img src="/images/FooterLogo.svg" alt="VL Global Logo" className="w-7 h-7 object-contain" />
                 <span 
                   className={`font-serif text-xl sm:text-2xl md:text-3xl font-bold tracking-[0.3em] group-hover:text-[#C8A97E] transition-colors duration-500 uppercase leading-none ${
-                    isScrolled ? 'text-black' : 'text-[#F7F3EE]'
+                    showSolidNav ? 'text-black' : 'text-[#F7F3EE]'
                   }`}
-                  style={{ textShadow: isScrolled ? 'none' : '0 2px 8px rgba(0,0,0,0.35)' }}
+                  style={{ textShadow: showSolidNav ? 'none' : '0 2px 8px rgba(0,0,0,0.35)' }}
                 >
                   VL Global
                 </span>
@@ -117,16 +123,16 @@ export function Navbar() {
                   key={link.label}
                   href={link.href}
                   className={`font-sans text-[10px] xl:text-[11px] uppercase tracking-[0.2em] hover:text-[#C8A97E] transition-colors duration-500 font-semibold relative py-1 group ${
-                    isScrolled ? 'text-[#1A1A1A]/85' : 'text-[#F7F3EE]'
+                    showSolidNav ? 'text-[#1A1A1A]/85' : 'text-[#F7F3EE]'
                   }`}
-                  style={{ textShadow: isScrolled ? 'none' : '0 1px 4px rgba(0,0,0,0.35)' }}
+                  style={{ textShadow: showSolidNav ? 'none' : '0 1px 4px rgba(0,0,0,0.35)' }}
                 >
                   {link.label}
                   <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#C8A97E] scale-x-0 group-hover:scale-x-100 transition-transform duration-400 origin-left" />
                 </Link>
               ))}
               
-              <div className={`h-4 w-[1px] ml-2 transition-colors duration-500 ${isScrolled ? 'bg-[#1A1A1A]/10' : 'bg-[#F7F3EE]/25'}`} />
+              <div className={`h-4 w-[1px] ml-2 transition-colors duration-500 ${showSolidNav ? 'bg-[#1A1A1A]/10' : 'bg-[#F7F3EE]/25'}`} />
  
               <div className="flex items-center gap-5">
                 <button
@@ -134,21 +140,21 @@ export function Navbar() {
                   className="p-1 cursor-pointer hover:text-[#C8A97E] transition-colors"
                   aria-label="Search"
                 >
-                  <Search className={`w-4 h-4 transition-colors duration-500 ${isScrolled ? 'text-[#1A1A1A]' : 'text-[#F7F3EE]'}`} />
+                  <Search className={`w-4 h-4 transition-colors duration-500 ${showSolidNav ? 'text-[#1A1A1A]' : 'text-[#F7F3EE]'}`} />
                 </button>
                 <button
                   onClick={() => setClientPortalOpen(true)}
                   className="p-1 cursor-pointer hover:text-[#C8A97E] transition-colors cursor-pointer"
                   aria-label="Account details"
                 >
-                  <User className={`w-4 h-4 transition-colors duration-500 ${isScrolled ? 'text-[#1A1A1A]' : 'text-[#F7F3EE]'}`} />
+                  <User className={`w-4 h-4 transition-colors duration-500 ${showSolidNav ? 'text-[#1A1A1A]' : 'text-[#F7F3EE]'}`} />
                 </button>
                 <button
                   onClick={() => alert("Your luxury selection bag is empty.")}
                   className="p-1 relative cursor-pointer hover:text-[#C8A97E] transition-colors"
                   aria-label="View bag"
                 >
-                  <ShoppingBag className={`w-4 h-4 transition-colors duration-500 ${isScrolled ? 'text-[#1A1A1A]' : 'text-[#F7F3EE]'}`} />
+                  <ShoppingBag className={`w-4 h-4 transition-colors duration-500 ${showSolidNav ? 'text-[#1A1A1A]' : 'text-[#F7F3EE]'}`} />
                   <span className="absolute -top-1 -right-1.5 flex items-center justify-center bg-[#C8A97E] text-[#F7F3EE] font-mono text-[8px] h-3.5 w-3.5 rounded-full font-bold">
                     0
                   </span>
@@ -163,14 +169,14 @@ export function Navbar() {
                 className="p-1 cursor-pointer hover:text-[#C8A97E] transition-colors cursor-pointer"
                 aria-label="Account details"
               >
-                <User className={`w-4.5 h-4.5 transition-colors duration-500 ${isScrolled ? 'text-[#1A1A1A]' : 'text-[#F7F3EE]'}`} />
+                <User className={`w-4.5 h-4.5 transition-colors duration-500 ${showSolidNav ? 'text-[#1A1A1A]' : 'text-[#F7F3EE]'}`} />
               </button>
               <button
                 onClick={() => alert("Your selection is currently empty.")}
                 className="p-1 relative cursor-pointer hover:text-[#C8A97E] transition-colors"
                 aria-label="View bag"
               >
-                <ShoppingBag className={`w-4.5 h-4.5 transition-colors duration-500 ${isScrolled ? 'text-[#1A1A1A]' : 'text-[#F7F3EE]'}`} />
+                <ShoppingBag className={`w-4.5 h-4.5 transition-colors duration-500 ${showSolidNav ? 'text-[#1A1A1A]' : 'text-[#F7F3EE]'}`} />
                 <span className="absolute -top-1 -right-1.5 flex items-center justify-center bg-[#C8A97E] text-[#F7F3EE] font-mono text-[7px] h-3.5 w-3.5 rounded-full font-bold">
                   0
                 </span>

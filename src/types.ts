@@ -14,6 +14,12 @@ export interface Product {
   isNew?: boolean;
   isFeatured?: boolean;
   details?: string[];
+  slug?: string;
+  tag?: string;
+  specs?: string[];
+  images?: string[];
+  customizable?: boolean;
+  bespoke?: boolean;
 }
 
 export interface Category {

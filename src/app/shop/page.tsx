@@ -9,6 +9,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import Link from 'next/link';
 import { Navbar } from '@/src/components/layout/Navbar';
 import { Footer } from '@/src/components/layout/Footer';
 import { Container } from '@/src/components/common/Container';
@@ -48,7 +49,7 @@ const PRODUCTS = [
     category: 'fabrics',
     price: 85,
     tag: 'Sustainable European Flax',
-    image: '/images/vian_fabric_showcase_1779434571577.webp',
+    image: '/images/fabrics/fabric_1.webp',
     description: 'European premium 70 lea pure linen fabric designed for breathable everyday wear and natural organic texture.',
     specs: ['Pure Organic Flax', 'Weight: 390g/m²', 'GSM: 140', 'Width: 58 inches']
   },
@@ -58,7 +59,7 @@ const PRODUCTS = [
     category: 'fabrics',
     price: 95,
     tag: 'Premium Cotton-Linen',
-    image: '/images/Category1.webp',
+    image: '/images/fabrics/fabric_2.webp',
     description: 'Balanced linen and cotton fibers created for soft texture, comfort, and everyday durable wear.',
     specs: ['55% Linen, 45% Cotton', 'Weight: 280g/m²', 'GSM: 120', 'Pre-shrunk Double Enzyme']
   },
@@ -68,9 +69,19 @@ const PRODUCTS = [
     category: 'fabrics',
     price: 110,
     tag: 'Special Edition Weave',
-    image: '/images/Category2.webp',
+    image: '/images/fabrics/fabric_3.webp',
     description: 'Cotton-linen fabric with scallop-pattern detailing designed for clean, refined, and custom everyday shirting.',
     specs: ['Special Jacquard Weave', 'Scallop Detailing', 'GSM: 130', 'Imported Long-staple']
+  },
+  {
+    id: 'f4',
+    name: 'Imperial Giza Cotton',
+    category: 'fabrics',
+    price: 125,
+    tag: 'Rare Egyptian Cotton',
+    image: '/images/fabrics/fabric_4.webp',
+    description: 'Rare double-twisted Giza Egyptian cotton weave, designed for an incredibly soft, smooth, and breathable sartorial handle.',
+    specs: ['100% Giza Cotton', 'Weight: 240g/m²', 'GSM: 110', 'High Thread Count']
   },
   
   // --- READY-TO-WEAR ---
@@ -177,6 +188,25 @@ interface CartItem {
   size?: string;
   color?: string;
 }
+
+const getProductSlug = (name: string) => {
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+};
+
+const getProductHref = (category: string, name: string) => {
+  const slug = getProductSlug(name);
+  let catSlug = category.toLowerCase();
+  if (catSlug === 'fabrics' || catSlug === 'fabric') {
+    catSlug = 'fabrics';
+  } else if (catSlug === 'ready-to-wear' || catSlug === 'ready_to_wear') {
+    catSlug = 'ready-to-wear';
+  } else if (catSlug === 'made-to-wear' || catSlug === 'made_to_wear') {
+    catSlug = 'made-to-wear';
+  } else if (catSlug === 'bespoke' || catSlug === 'be_spoke') {
+    catSlug = 'bespoke';
+  }
+  return `/shop/${catSlug}/${slug}`;
+};
 
 export default function ShopPage() {
   const [activeCategory, setActiveCategory] = useState<string>('all');
@@ -469,7 +499,7 @@ export default function ShopPage() {
                     className="shop-product-card flex flex-col h-full bg-[#E8DED1]/20 border border-[#1A1A1A]/5 rounded-[24px] overflow-hidden hover:shadow-xl transition-all duration-500 relative"
                   >
                     {/* Image frame */}
-                    <div className="relative aspect-[4/5] overflow-hidden bg-gray-100 group">
+                    <Link href={getProductHref(product.category, product.name)} className="relative aspect-[4/5] overflow-hidden bg-gray-100 group block cursor-pointer">
                       <img
                         src={product.image}
                         alt={product.name}
@@ -485,7 +515,7 @@ export default function ShopPage() {
 
                       {/* Small visual accent frame */}
                       <div className="absolute inset-4 border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-                    </div>
+                    </Link>
 
                     {/* Description Body */}
                     <div className="p-6 sm:p-8 flex flex-col flex-grow space-y-6">
@@ -498,9 +528,11 @@ export default function ShopPage() {
                             ${product.price} {product.category === 'fabrics' && '/ Meter'}
                           </span>
                         </div>
-                        <h3 className="font-serif text-xl sm:text-2xl font-light text-[#1A1A1A] tracking-wide">
-                          {product.name}
-                        </h3>
+                        <Link href={getProductHref(product.category, product.name)} className="hover:text-[#C8A97E] transition-colors block cursor-pointer">
+                          <h3 className="font-serif text-xl sm:text-2xl font-light text-[#1A1A1A] tracking-wide">
+                            {product.name}
+                          </h3>
+                        </Link>
                         <p className="font-sans text-xs sm:text-sm text-[#1A1A1A]/70 leading-relaxed font-light">
                           {product.description}
                         </p>
@@ -518,109 +550,9 @@ export default function ShopPage() {
                         ))}
                       </div>
 
-                      {/* Fabrics Length Selection */}
-                      {product.category === 'fabrics' && (
-                        <div className="pt-4 border-t border-[#1A1A1A]/5 space-y-3">
-                          <div className="flex items-center justify-between">
-                            <span className="font-mono text-[9px] uppercase tracking-widest text-[#C8A97E] font-bold">
-                              Select Length
-                            </span>
-                            <span className="font-sans text-[11px] text-[#1A1A1A]/60 font-semibold font-mono">
-                              Total: ${(selectedMeters[product.id] || 2) * product.price}
-                            </span>
-                          </div>
-                          <div className="flex flex-wrap gap-1 bg-[#1A1A1A]/5 p-1 rounded-[12px] border border-[#1A1A1A]/5">
-                            {[1, 1.5, 2, 2.5, 3, 4, 5].map((meter) => (
-                              <button
-                                key={meter}
-                                onClick={() => setSelectedMeters({ ...selectedMeters, [product.id]: meter })}
-                                className={`flex-1 min-w-[32px] py-1.5 rounded-[8px] font-mono text-[10px] font-bold transition-all cursor-pointer ${
-                                  (selectedMeters[product.id] || 2) === meter
-                                    ? 'bg-[#1A1A1A] text-[#F7F3EE] shadow-sm'
-                                    : 'hover:bg-[#1A1A1A]/5 text-[#1A1A1A]/65'
-                                }`}
-                              >
-                                {meter}m
-                              </button>
-                            ))}
-                          </div>
-                        </div>
-                      )}
 
-                      {/* Ready-To-Wear Size and Color Selection */}
-                      {product.category === 'ready-to-wear' && (
-                        <div className="pt-4 border-t border-[#1A1A1A]/5 space-y-4">
-                          {/* Size Selection */}
-                          <div className="space-y-2">
-                            <span className="font-mono text-[9px] uppercase tracking-widest text-[#C8A97E] font-bold block">
-                              Select Size
-                            </span>
-                            <div className="flex gap-1 bg-[#1A1A1A]/5 p-1 rounded-full border border-[#1A1A1A]/5">
-                              {['S', 'M', 'L', 'XL', 'XXL'].map((size) => (
-                                <button
-                                  key={size}
-                                  onClick={() => setSelectedSize({ ...selectedSize, [product.id]: size })}
-                                  className={`flex-1 py-1.5 rounded-full font-sans text-[10px] font-bold transition-all cursor-pointer ${
-                                    (selectedSize[product.id] || 'M') === size
-                                      ? 'bg-[#1A1A1A] text-[#F7F3EE] shadow-sm'
-                                      : 'hover:bg-[#1A1A1A]/5 text-[#1A1A1A]/65'
-                                  }`}
-                                >
-                                  {size}
-                                </button>
-                              ))}
-                            </div>
-                          </div>
 
-                          {/* Color Selection */}
-                          <div className="space-y-2">
-                            <span className="font-mono text-[9px] uppercase tracking-widest text-[#C8A97E] font-bold block">
-                              Select Color
-                            </span>
-                            <div className="flex flex-wrap gap-2">
-                              {(product.id === 'rtw1' 
-                                ? [
-                                    { name: 'Pure White', hex: '#FFFFFF', border: 'border-black/20' }, 
-                                    { name: 'Oatmeal Sand', hex: '#E6DFD5', border: 'border-black/5' }, 
-                                    { name: 'Aether Sky Blue', hex: '#D2E1EC', border: 'border-black/5' }
-                                  ]
-                                : product.id === 'rtw2'
-                                ? [
-                                    { name: 'Ivory Cream', hex: '#FAF5EF', border: 'border-black/20' }, 
-                                    { name: 'Carbon Charcoal', hex: '#2A2A2A', border: 'border-white/10' }, 
-                                    { name: 'Earthy Olive', hex: '#606456', border: 'border-black/5' }
-                                  ]
-                                : [
-                                    { name: 'Crimson Red', hex: '#9E2A2B', border: 'border-black/5' }, 
-                                    { name: 'Terracotta', hex: '#CA6702', border: 'border-black/5' }, 
-                                    { name: 'Midnight Navy', hex: '#1D2D44', border: 'border-white/10' }
-                                  ]
-                              ).map((color) => {
-                                const defaultColor = product.id === 'rtw1' ? 'Pure White' : product.id === 'rtw2' ? 'Ivory Cream' : 'Crimson Red';
-                                const activeColor = selectedColor[product.id] || defaultColor;
-                                const isSelected = activeColor === color.name;
-                                return (
-                                  <button
-                                    key={color.name}
-                                    onClick={() => setSelectedColor({ ...selectedColor, [product.id]: color.name })}
-                                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-[10px] font-medium transition-all cursor-pointer ${
-                                      isSelected
-                                        ? 'bg-[#1a1a1a] text-white border-transparent shadow-sm'
-                                        : 'bg-white text-[#1a1a1a]/70 border-[#1a1a1a]/10 hover:border-[#1a1a1a]/20'
-                                    }`}
-                                  >
-                                    <span 
-                                      className={`w-2.5 h-2.5 rounded-full border ${color.border}`} 
-                                      style={{ backgroundColor: color.hex }}
-                                    />
-                                    {color.name}
-                                  </button>
-                                );
-                              })}
-                            </div>
-                          </div>
-                        </div>
-                      )}
+
 
                       {/* --- CUSTOMIZABLE ACTION ACCORDIONS --- */}
                       <AnimatePresence>
@@ -839,13 +771,13 @@ export default function ShopPage() {
                                 onClick={() => {
                                   if (product.category === 'fabrics') {
                                     handleAddToCart(product, {
-                                      meters: selectedMeters[product.id] || 2
+                                      meters: 1
                                     });
                                   } else if (product.category === 'ready-to-wear') {
                                     const defaultColor = product.id === 'rtw1' ? 'Pure White' : product.id === 'rtw2' ? 'Ivory Cream' : 'Crimson Red';
                                     handleAddToCart(product, {
-                                      size: selectedSize[product.id] || 'M',
-                                      color: selectedColor[product.id] || defaultColor
+                                      size: 'M',
+                                      color: defaultColor
                                     });
                                   } else {
                                     handleAddToCart(product);
@@ -854,13 +786,7 @@ export default function ShopPage() {
                                 className="w-full py-3 bg-[#1A1A1A] hover:bg-[#C8A97E] hover:text-[#1A1A1A] text-[#F7F3EE] font-sans text-[10px] uppercase tracking-widest font-bold rounded-full transition-all duration-300 flex items-center justify-center gap-1.5 cursor-pointer shadow-sm"
                               >
                                 <ShoppingBag className="w-3.5 h-3.5" />
-                                {product.category === 'fabrics' ? (
-                                  `Add ${selectedMeters[product.id] || 2}m to Bag`
-                                ) : product.category === 'ready-to-wear' ? (
-                                  `Add ${selectedSize[product.id] || 'M'} / ${selectedColor[product.id] || (product.id === 'rtw1' ? 'Pure White' : product.id === 'rtw2' ? 'Ivory Cream' : 'Crimson Red')} to Bag`
-                                ) : (
-                                  'Add To Bag'
-                                )}
+                                Add to Bag
                               </button>
                             )}
                           </div>

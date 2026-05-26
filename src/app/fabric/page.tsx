@@ -77,77 +77,76 @@ export default function FabricPage() {
         </section>
 
         {/* SECTION 1: WHAT IS FABRIC COLLECTION? */}
-        <section className="py-20 md:py-28 bg-[#F7F3EE]">
+        <section className="py-24 bg-[#F7F3EE]">
           <Container>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center max-w-[1200px] mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center max-w-[1200px] mx-auto">
               {/* Left Column: Image */}
-              <FadeUp className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl max-w-sm lg:max-w-md w-full mx-auto order-1">
-                <img
-                  src="/images/Category1.webp"
-                  alt="VL Global Premium Fabrics"
-                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-103"
-                />
-                <div className="absolute inset-0 bg-black/5" />
-              </FadeUp>
+              <div className="lg:col-span-5 relative group">
+                <div className="absolute inset-0 bg-[#C8A97E]/10 rounded-3xl blur-xl group-hover:bg-[#C8A97E]/15 transition-all duration-300" />
+                <div className="relative p-3 bg-white border border-[#1A1A1A]/10 rounded-3xl shadow-xl transition-transform duration-[800ms] group-hover:scale-[1.01]">
+                  <div className="overflow-hidden rounded-2xl aspect-[4/5] relative">
+                    <img
+                      src="/images/Category1.webp"
+                      alt="VL Global Premium Fabrics"
+                      className="w-full h-full object-cover transition-transform duration-[1500ms] group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-black/10" />
+                  </div>
+                </div>
+              </div>
 
               {/* Right Column: Narrative & Features */}
-              <div className="space-y-10 order-2">
-                <div className="space-y-4">
-                  <FadeUp delay={0.1}>
-                    <span className="font-sans text-[10px] uppercase tracking-[0.3em] font-bold text-[#C8A97E]">WHAT IS</span>
-                  </FadeUp>
-                  <StaggeredBlurReveal
-                    text="Fabric Collection?"
-                    as="h2"
-                    className="font-serif text-3xl sm:text-4xl font-light text-[#1A1A1A]"
-                  />
-                  <FadeUp delay={0.25}>
-                    <p className="font-sans text-base md:text-lg text-[#1A1A1A]/75 leading-relaxed font-light">
-                      Explore linen and cotton fabrics designed for breathable wear, soft texture, and everyday shirting use.
-                    </p>
-                  </FadeUp>
+              <div className="lg:col-span-7 space-y-10">
+                <div className="space-y-4 text-center lg:text-left">
+                  <span className="font-mono text-[9px] uppercase tracking-[0.3em] font-bold text-[#C8A97E] block">WHAT IS</span>
+                  <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light text-[#1A1A1A] tracking-wide leading-tight">
+                    Fabric Collection?
+                  </h2>
+                  <p className="font-sans text-sm sm:text-base text-[#1A1A1A]/75 leading-relaxed font-light max-w-xl mx-auto lg:mx-0">
+                    Explore linen and cotton fabrics designed for breathable wear, soft organic textures, and premium everyday shirting use.
+                  </p>
                 </div>
 
-                {/* Three Features List */}
-                <div className="space-y-6">
+                {/* Features cards inside a premium layout */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                   {/* Block 1 */}
-                  <FadeUp delay={0.3} className="flex gap-4 items-start">
+                  <div className="bg-white p-6 rounded-2xl border border-[#1A1A1A]/5 shadow-xs hover:shadow-md transition-shadow duration-300 space-y-4 flex flex-col justify-between">
                     <div className="w-10 h-10 rounded-full bg-[#C8A97E]/10 flex items-center justify-center text-[#C8A97E] shrink-0">
                       <Sparkles className="w-5 h-5" />
                     </div>
-                    <div className="space-y-1">
-                      <h4 className="font-serif text-lg text-[#1A1A1A]">Breathable Fabric Texture</h4>
-                      <p className="font-sans text-sm text-[#1A1A1A]/60 font-light leading-relaxed">
+                    <div className="space-y-1.5">
+                      <h4 className="font-serif text-sm font-semibold text-[#1A1A1A]">Breathable Texture</h4>
+                      <p className="font-sans text-[11px] text-[#1A1A1A]/60 font-light leading-relaxed">
                         Designed with natural linen and cotton fibers suitable for comfortable everyday wear.
                       </p>
                     </div>
-                  </FadeUp>
+                  </div>
 
                   {/* Block 2 */}
-                  <FadeUp delay={0.4} className="flex gap-4 items-start">
+                  <div className="bg-white p-6 rounded-2xl border border-[#1A1A1A]/5 shadow-xs hover:shadow-md transition-shadow duration-300 space-y-4 flex flex-col justify-between">
                     <div className="w-10 h-10 rounded-full bg-[#C8A97E]/10 flex items-center justify-center text-[#C8A97E] shrink-0">
                       <Sliders className="w-5 h-5" />
                     </div>
-                    <div className="space-y-1">
-                      <h4 className="font-serif text-lg text-[#1A1A1A]">Everyday Fabric Options</h4>
-                      <p className="font-sans text-sm text-[#1A1A1A]/60 font-light leading-relaxed">
+                    <div className="space-y-1.5">
+                      <h4 className="font-serif text-sm font-semibold text-[#1A1A1A]">Everyday Options</h4>
+                      <p className="font-sans text-[11px] text-[#1A1A1A]/60 font-light leading-relaxed">
                         Selected fabrics suitable for shirt construction, regular use, and balanced fabric feel.
                       </p>
                     </div>
-                  </FadeUp>
+                  </div>
 
                   {/* Block 3 */}
-                  <FadeUp delay={0.5} className="flex gap-4 items-start">
+                  <div className="bg-white p-6 rounded-2xl border border-[#1A1A1A]/5 shadow-xs hover:shadow-md transition-shadow duration-300 space-y-4 flex flex-col justify-between">
                     <div className="w-10 h-10 rounded-full bg-[#C8A97E]/10 flex items-center justify-center text-[#C8A97E] shrink-0">
                       <Shield className="w-5 h-5" />
                     </div>
-                    <div className="space-y-1">
-                      <h4 className="font-serif text-lg text-[#1A1A1A]">Simple Fabric Selection</h4>
-                      <p className="font-sans text-sm text-[#1A1A1A]/60 font-light leading-relaxed">
-                        Choose fabrics based on texture, blend, and everyday shirting preference.
+                    <div className="space-y-1.5">
+                      <h4 className="font-serif text-sm font-semibold text-[#1A1A1A]">Simple Selection</h4>
+                      <p className="font-sans text-[11px] text-[#1A1A1A]/60 font-light leading-relaxed">
+                        Choose fabrics based on texture, organic blend, and everyday shirting preference.
                       </p>
                     </div>
-                  </FadeUp>
+                  </div>
                 </div>
               </div>
             </div>
@@ -155,82 +154,84 @@ export default function FabricPage() {
         </section>
 
         {/* SECTION 2: WHY CHOOSE OUR FABRICS? */}
-        <section className="py-20 md:py-24 bg-white border-y border-[#1A1A1A]/5">
+        <section className="py-24 bg-white border-y border-[#1A1A1A]/10">
           <Container>
-            <div className="max-w-[1000px] mx-auto">
-              <div className="text-center mb-16 space-y-4">
-                <FadeUp delay={0.1}>
-                  <span className="font-sans text-[10px] uppercase tracking-[0.3em] font-bold text-[#C8A97E]">Atelier Specs</span>
-                </FadeUp>
-                <StaggeredBlurReveal
-                  text="Why Choose Our Fabrics?"
-                  as="h2"
-                  className="font-serif text-3xl sm:text-4xl font-light text-[#1A1A1A]"
-                />
-                <FadeUp delay={0.2}>
-                  <p className="font-sans text-sm sm:text-base text-[#1A1A1A]/60 max-w-xl mx-auto font-light leading-relaxed">
-                    Our linen and cotton fabrics are selected for breathable texture, soft feel, and everyday shirting use.
-                  </p>
-                </FadeUp>
+            <div className="max-w-4xl mx-auto space-y-16">
+              <div className="text-center space-y-4">
+                <span className="font-mono text-[9px] uppercase tracking-[0.3em] font-bold text-[#C8A97E] block">Atelier Specs</span>
+                <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light text-[#1A1A1A] tracking-wide">
+                  Why Choose Our Fabrics?
+                </h2>
+                <p className="font-sans text-xs sm:text-sm text-[#1A1A1A]/60 max-w-lg mx-auto font-light leading-relaxed">
+                  Our linen and cotton fabrics represent the pinnacle of organic sustainable harvesting and traditional weaving crafts.
+                </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {/* Benefit 1 */}
-                <FadeUp delay={0.15} className="bg-[#F7F3EE] p-8 rounded-[24px] border border-[#1A1A1A]/5 space-y-4">
-                  <div className="w-8 h-8 rounded-full bg-[#C8A97E] text-[#1A1A1A] flex items-center justify-center">
+                <div className="group bg-[#F7F3EE] p-8 rounded-3xl border border-[#1A1A1A]/5 shadow-xs hover:shadow-lg hover:bg-white hover:border-[#C8A97E]/30 transition-all duration-500 space-y-5">
+                  <div className="w-10 h-10 rounded-full bg-[#C8A97E] text-white flex items-center justify-center shadow-sm">
                     <Check className="w-4 h-4" />
                   </div>
-                  <h4 className="font-serif text-xl text-[#1A1A1A]">Pure Linen Fabric</h4>
-                  <p className="font-sans text-xs sm:text-sm text-[#1A1A1A]/70 leading-relaxed font-light">
-                    European premium 70 lea pure linen fabric designed for breathable wear and natural texture.
-                  </p>
-                </FadeUp>
+                  <div className="space-y-2">
+                    <h4 className="font-serif text-lg font-semibold text-[#1A1A1A] group-hover:text-[#C8A97E] transition-colors">Pure Linen Fabric</h4>
+                    <p className="font-sans text-xs sm:text-sm text-[#1A1A1A]/70 leading-relaxed font-light">
+                      European premium 70 lea pure linen fabric designed for breathable wear and natural organic texture.
+                    </p>
+                  </div>
+                </div>
 
                 {/* Benefit 2 */}
-                <FadeUp delay={0.3} className="bg-[#F7F3EE] p-8 rounded-[24px] border border-[#1A1A1A]/5 space-y-4">
-                  <div className="w-8 h-8 rounded-full bg-[#C8A97E] text-[#1A1A1A] flex items-center justify-center">
+                <div className="group bg-[#F7F3EE] p-8 rounded-3xl border border-[#1A1A1A]/5 shadow-xs hover:shadow-lg hover:bg-white hover:border-[#C8A97E]/30 transition-all duration-500 space-y-5">
+                  <div className="w-10 h-10 rounded-full bg-[#C8A97E] text-white flex items-center justify-center shadow-sm">
                     <Check className="w-4 h-4" />
                   </div>
-                  <h4 className="font-serif text-xl text-[#1A1A1A]">Cotton Linen Blend</h4>
-                  <p className="font-sans text-xs sm:text-sm text-[#1A1A1A]/70 leading-relaxed font-light">
-                    Balanced linen and cotton fabrics are created for soft texture and comfortable everyday use.
-                  </p>
-                </FadeUp>
+                  <div className="space-y-2">
+                    <h4 className="font-serif text-lg font-semibold text-[#1A1A1A] group-hover:text-[#C8A97E] transition-colors">Cotton Linen Blend</h4>
+                    <p className="font-sans text-xs sm:text-sm text-[#1A1A1A]/70 leading-relaxed font-light">
+                      Balanced linen and cotton fabrics are created for soft texture, comfort, and everyday durable wear.
+                    </p>
+                  </div>
+                </div>
 
                 {/* Benefit 3 */}
-                <FadeUp delay={0.45} className="bg-[#F7F3EE] p-8 rounded-[24px] border border-[#1A1A1A]/5 space-y-4">
-                  <div className="w-8 h-8 rounded-full bg-[#C8A97E] text-[#1A1A1A] flex items-center justify-center">
+                <div className="group bg-[#F7F3EE] p-8 rounded-3xl border border-[#1A1A1A]/5 shadow-xs hover:shadow-lg hover:bg-white hover:border-[#C8A97E]/30 transition-all duration-500 space-y-5">
+                  <div className="w-10 h-10 rounded-full bg-[#C8A97E] text-white flex items-center justify-center shadow-sm">
                     <Check className="w-4 h-4" />
                   </div>
-                  <h4 className="font-serif text-xl text-[#1A1A1A]">Scallop Pattern Fabric</h4>
-                  <p className="font-sans text-xs sm:text-sm text-[#1A1A1A]/70 leading-relaxed font-light">
-                    Cotton-linen fabric with scallop-pattern detailing designed for clean and refined fabric styling.
-                  </p>
-                </FadeUp>
+                  <div className="space-y-2">
+                    <h4 className="font-serif text-lg font-semibold text-[#1A1A1A] group-hover:text-[#C8A97E] transition-colors">Scallop Weave</h4>
+                    <p className="font-sans text-xs sm:text-sm text-[#1A1A1A]/70 leading-relaxed font-light">
+                      Cotton-linen fabric with scallop-pattern detailing designed for clean, refined, and custom everyday shirting.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </Container>
         </section>
 
         {/* SECTION 3: CUSTOMER REVIEWS */}
-        <section className="py-20 bg-[#F5F5F3]">
+        <section className="py-24 bg-[#F5F5F3]">
           <Container>
-            <div className="max-w-[1100px] mx-auto">
-              <div className="text-center mb-16 space-y-4">
-                <FadeUp delay={0.1}>
-                  <span className="font-sans text-[10px] uppercase tracking-[0.3em] font-bold text-[#C8A97E]">Atelier Journal</span>
-                </FadeUp>
-                <StaggeredBlurReveal
-                  text="Customer Stories"
-                  as="h2"
-                  className="font-serif text-3xl sm:text-4xl font-light text-[#1A1A1A]"
-                />
+            <div className="max-w-[1200px] mx-auto space-y-16">
+              <div className="text-center space-y-3">
+                <span className="font-mono text-[9px] uppercase tracking-[0.3em] font-bold text-[#C8A97E] block">Atelier Journal</span>
+                <h2 className="font-serif text-3xl sm:text-4xl font-light text-[#1A1A1A] tracking-wide">
+                  Customer Stories
+                </h2>
+                <p className="font-sans text-xs sm:text-sm text-[#1A1A1A]/60 max-w-lg mx-auto font-light leading-relaxed">
+                  Discover how sartorial enthusiasts and custom designers utilize Vian Luxure swatches to construct shirting.
+                </p>
               </div>
 
-              {/* Staggered Reviews Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* Highly polished Testimonials Cards Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {reviews.map((rev, i) => (
-                  <FadeUp key={rev.name} delay={0.08 * i} className="bg-white p-6 sm:p-8 rounded-[20px] shadow-sm border border-[#1A1A1A]/5 flex flex-col justify-between space-y-6">
+                  <div
+                    key={rev.name}
+                    className="bg-white p-8 rounded-3xl border border-[#1A1A1A]/5 flex flex-col justify-between space-y-8 hover:shadow-xl transition-all duration-500"
+                  >
                     <div className="space-y-4">
                       {/* Star rating */}
                       <div className="flex items-center gap-1">
@@ -245,16 +246,20 @@ export default function FabricPage() {
                           />
                         ))}
                       </div>
+                      
                       <p className="font-sans text-xs sm:text-sm text-[#1A1A1A]/75 leading-relaxed font-light italic">
                         "{rev.text}"
                       </p>
                     </div>
 
-                    <div className="flex items-center justify-between pt-4 border-t border-[#1A1A1A]/5 text-[10px] sm:text-xs font-sans">
-                      <span className="font-semibold text-[#1A1A1A]">{rev.name}</span>
-                      <span className="text-[#1A1A1A]/40">{rev.date}</span>
+                    <div className="flex items-center justify-between pt-6 border-t border-[#1A1A1A]/5 text-xs font-sans">
+                      <div className="flex flex-col">
+                        <span className="font-bold text-[#1A1A1A]">{rev.name}</span>
+                        <span className="text-[9px] text-[#C8A97E] uppercase font-mono tracking-wider font-bold mt-0.5">Verified Client</span>
+                      </div>
+                      <span className="text-[#1A1A1A]/40 text-[10px] font-mono">{rev.date}</span>
                     </div>
-                  </FadeUp>
+                  </div>
                 ))}
               </div>
             </div>

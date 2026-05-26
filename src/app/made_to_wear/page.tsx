@@ -51,7 +51,7 @@ export default function MadeToWearPage() {
     { q: "How is made-to-wear different from ready-to-wear?", a: "While ready-to-wear is pre-made to off-the-shelf standard sizes, made-to-wear allows you to customize the collar styles, cuff styles, pocket placements, and buttons to your exact taste while using standard structured fits." },
     { q: "Can I customize the shirt design?", a: "Yes. You have the creative freedom to select your preferred collar type (e.g. spread, button-down), cuff styles, monograms, and custom button materials like mother-of-pearl or natural horn." },
     { q: "Do I need to provide body measurements?", a: "No, made-to-wear uses standard chest and neck sizes (e.g. Size 38, 40, 42). If you want full custom measurement-based drafting, please visit our Bespoke page." },
-    { q: "Is made-to-wear suitable for everyday use?", a: "Absolutely. All made-to-wear shirts are crafted from highly durable, double-stitched organic fabrics designed for regular everyday wash and wear." }
+    { q: "Is made-to-wear suitable for everyday use?", a: "Yes. Made-to-wear shirts are designed for regular wear with balanced fits, breathable fabrics, and clean construction details." }
   ];
 
   const handleNext = () => {
@@ -260,7 +260,7 @@ export default function MadeToWearPage() {
                   />
                   <FadeUp delay={0.25}>
                     <p className="font-sans text-base md:text-lg text-[#1A1A1A]/75 leading-relaxed font-light">
-                      Made-to-wear shirts offer a more personalized approach to everyday dressing. Choose your preferred fabrics, collars, cuffs, and finishing details while maintaining a clean and well-structured fit designed for regular wear.
+                      Made-to-wear offers a more personalized approach than ready-made shirts while still using structured sizing. Customers can customize selected design elements such as collars, cuffs, buttons, sleeves, and finishing details.
                     </p>
                   </FadeUp>
                 </div>
